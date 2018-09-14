@@ -1,0 +1,30 @@
+{
+  "name": "epigram-client",
+  "version": "1.0.0",
+  "description": "Instagram + EPITECH + cours de javascript = EPIGRAM",
+  "main": "index.js",
+  "dependencies": {
+    "eslint": "^5.3.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.0",
+    "prettier": "^1.14.2",
+    "react": "^16.5.1",
+    "react-dom": "^16.5.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andnerb/epigram-client.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andnerb/epigram-client/issues"
+  },
+  "homepage": "https://github.com/andnerb/epigram-client#readme"
+}
