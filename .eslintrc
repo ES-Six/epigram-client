@@ -1,4 +1,4 @@
 {
-  "extends": ["airbnb", "prettier", "jsx-a11y"],
-  "plugins": ["prettier"]
+  "extends": ["airbnb", "prettier", "plugin:jsx-a11y/recommended"],
+  "plugins": ["prettier", "jsx-a11y"]
 }
