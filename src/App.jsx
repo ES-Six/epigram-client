@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
 import logo from './logo.svg';
 import './App.css';
 
@@ -13,6 +14,10 @@ const App = () => (
         To get started, edit
         <code>src/App.jsx</code>
         and save to reload.
+        <br />
+        <Button variant="contained" color="primary">
+          Hello World
+        </Button>
       </p>
     </div>
   )

@@ -4,6 +4,7 @@
   "description": "Instagram + EPITECH + cours de javascript = EPIGRAM",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^3.1.0",
     "ajv": "^6.0.0",
     "npm": "^6.4.1",
     "prettier": "^1.14.2",
