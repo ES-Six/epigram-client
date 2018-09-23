@@ -1,24 +1,15 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import green from '@material-ui/core/colors/green';
 import logo from '../logo.svg';
 import '../App.css';
 
-const GreenButton = withStyles({
-  root: {
-    background: '#28a745',
-    borderRadius: 3,
-    border: 0,
-    'border-color': '#28a745',
-    color: 'white',
-    height: 48,
-    padding: '0 30px',
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-    '&:hover': {
-      background: '#20803b',
-    },
+const theme = createMuiTheme({
+  palette: {
+    primary: green,
   },
-})(Button);
+});
 
 const App2 = () => (
   (
@@ -30,9 +21,11 @@ const App2 = () => (
       <p className="App-intro">
         Page 2: navigation detected
         <br />
-        <GreenButton variant="contained">
-          Congratulation !
-        </GreenButton>
+        <MuiThemeProvider theme={theme}>
+          <Button variant="contained" color="primary">
+            Congratulation !
+          </Button>
+        </MuiThemeProvider>
       </p>
     </div>
   )
