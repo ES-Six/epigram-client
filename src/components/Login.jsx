@@ -25,10 +25,15 @@ const styles = theme => ({
     height: '95vh',
     overflow: 'hidden',
   },
+  error: {
+    color: 'red',
+  },
 });
 
 const Login = (props) => {
   const { classes } = props;
+
+  global.console.log('RENDER PARENT');
 
   return (
     <div className={classes.root}>
