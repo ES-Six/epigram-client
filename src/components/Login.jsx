@@ -1,11 +1,9 @@
 import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import LoginContainer from '../containers/LoginContainer';
 
 const styles = theme => ({
   root: {
@@ -40,32 +38,7 @@ const Login = (props) => {
             <Grid item xs={12}>
               <h3>Login</h3>
             </Grid>
-            <form className={classes.container} noValidate autoComplete="off">
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  label="Email"
-                  type="text"
-                  placeholder="your@email.com"
-                  className={classes.textField}
-                  margin="normal"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  label="Password"
-                  className={classes.textField}
-                  type="password"
-                  autoComplete="current-password"
-                  margin="normal"
-                />
-              </Grid>
-            </form>
-
-            <NavLink to="/page2">
-              <Button variant="contained" color="primary">Login</Button>
-            </NavLink>
+            <LoginContainer props={props} />
           </Paper>
         </Grid>
       </Grid>
