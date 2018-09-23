@@ -1,7 +1,7 @@
-export const doLogin = (email, password) => ({
+export const doLogin = (successCallback, errorCallback) => ({
   type: 'DO_LOGIN',
-  email,
-  password,
+  successCallback,
+  errorCallback,
 });
 
 export const updateEmail = email => ({

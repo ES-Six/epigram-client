@@ -8,7 +8,7 @@ import { doLogin, updateEmail, updatePassword } from '../actions/Login';
 
 const LoginContainer = (props) => {
   const { props: { classes } } = props;
-  const { values } = props;
+  const { props: { history } } = props;
 
   const handleChange = action => (event) => {
     props.dispatch(action(event.target.value));
@@ -19,7 +19,12 @@ const LoginContainer = (props) => {
       className={classes.container}
       onSubmit={(e) => {
         e.preventDefault();
-        props.dispatch(doLogin(values.email, values.password));
+        props.dispatch(doLogin(() => {
+          console.log('Login success');
+          history.push('/page2');
+        }, () => {
+          console.log('Login error');
+        }));
       }}
     >
       <Grid item xs={12}>
@@ -51,16 +56,16 @@ const LoginContainer = (props) => {
 
 LoginContainer.defaultProps = {
   classes: {},
-  values: {
-    email: '',
-    password: '',
-  },
+  history: {},
 };
 
 LoginContainer.propTypes = {
-  props: PropTypes.shape({ classes: PropTypes.shape().isRequired }).isRequired,
+  props: PropTypes.shape({
+    classes: PropTypes.shape().isRequired,
+    history: PropTypes.shape().isRequired,
+  }).isRequired,
   classes: PropTypes.shape(),
-  values: PropTypes.shape({ email: PropTypes.string, password: PropTypes.string }),
+  history: PropTypes.shape(),
   dispatch: PropTypes.func.isRequired,
 };
 
