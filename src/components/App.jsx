@@ -1,7 +1,8 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import logo from './logo.svg';
-import './App.css';
+import { NavLink } from 'react-router-dom';
+import logo from '../logo.svg';
+import '../App.css';
 
 const App = () => (
   (
@@ -15,9 +16,13 @@ const App = () => (
         <code>src/App.jsx</code>
         and save to reload.
         <br />
-        <Button variant="contained" color="primary">
-          Hello World
-        </Button>
+
+        <NavLink to="/page2">
+          <Button variant="contained" color="primary">
+            Go to page 2
+          </Button>
+        </NavLink>
+
       </p>
     </div>
   )
