@@ -4,19 +4,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Login from './Login';
 import Register from './Register';
-import MenuBar from './MenuBar';
+import Home from './Home';
+import PhotoGalery from './PhotoGalery';
 
-const Root = ({ store }) => (
-  <Provider store={store}>
-    <Router>
-      <div>
-        <Route path="/" exact component={Login} />
-        <Route path="/register" component={Register} />
-        <Route path="/photos" component={MenuBar} />
-      </div>
-    </Router>
-  </Provider>
-);
+const Root = ({ store }) => {
+  const { displayMenu } = store;
+
+  return (
+    <Provider store={store}>
+      <Router>
+        <div>
+          <Route path="/" exact component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/home" component={Home} />
+          <Route path="/categories/:id" component={PhotoGalery} />
+        </div>
+      </Router>
+    </Provider>
+  );
+};
 
 Root.propTypes = {
   store: PropTypes.shape().isRequired,

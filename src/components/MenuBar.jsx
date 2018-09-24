@@ -8,9 +8,6 @@ import DesktopMenu from '../containers/DesktopMenu';
 import MobileMenu from '../containers/MobileMenu';
 import ProfileMenu from '../containers/ProfileMenu';
 import MenuDrawer from '../containers/MenuDrawer';
-import Button from "@material-ui/core/Button/Button";
-import Drawer from "@material-ui/core/Drawer/Drawer";
-
 
 const styles = theme => ({
   root: {
@@ -100,10 +97,6 @@ const MenuBar = (props) => {
       <MenuDrawer classes={classes} history={history} />
     </div>
   );
-};
-
-MenuBar.defaultProps = {
-
 };
 
 MenuBar.propTypes = {

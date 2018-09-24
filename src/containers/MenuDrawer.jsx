@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Drawer from '@material-ui/core/Drawer';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import {
   toggleDrawer,
@@ -16,14 +17,12 @@ const MenuDrawer = (props) => {
   const { openDrawer } = props;
   const { categories } = props;
 
-  console.log('render', categories);
-
   let sideList = null;
   if (categories.length > 0) {
     sideList = (
       <div className={classes.list}>
         {categories.map(category => (
-          <ListItem key={category.id} button>
+          <ListItem key={category.id} button component={Link} to={`/categories/${category.id}`}>
             <ListItemText primary={category.name} />
           </ListItem>
         ))}
@@ -38,12 +37,10 @@ const MenuDrawer = (props) => {
       </div>
     );
 
-    console.log('FETCH_CATEGORIES');
-
     axios.get('/categories').then((response) => {
       props.dispatch(updateCategories(response.data.result));
     }).catch((error) => {
-      console.log(error);
+      global.console.log(error);
     });
   }
 

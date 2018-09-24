@@ -3,27 +3,26 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import MenuItem from '@material-ui/core/MenuItem/MenuItem';
-import IconButton from '@material-ui/core/IconButton/IconButton';
 import Menu from '@material-ui/core/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import Cookies from 'js-cookie';
 
 import {
   updateMobileMenuAnchor,
-  updateDesktopMenuAnchor,
 } from '../actions/MenuBar';
 
 const MobileMenu = (props) => {
-  const { classes } = props;
   const { history } = props;
   const { mobileMoreAnchorEl } = props;
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleProfileMenuOpen = (event) => {
-    props.dispatch(updateDesktopMenuAnchor(event.currentTarget));
-  };
-
   const handleMobileMenuClose = () => {
     props.dispatch(updateMobileMenuAnchor(null));
+  };
+
+  const logout = () => {
+    console.log('LOGEDOUT');
+    Cookies.remove('token');
+    history.push('/');
   };
 
   return (
@@ -34,11 +33,11 @@ const MobileMenu = (props) => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton color="inherit">
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
+      <MenuItem onClick={handleMobileMenuClose}>
+        <p>Account managment</p>
+      </MenuItem>
+      <MenuItem onClick={() => { handleMobileMenuClose(); logout(); }}>
+        <p>Logout</p>
       </MenuItem>
     </Menu>
   );
@@ -54,7 +53,6 @@ MobileMenu.defaultProps = {
 
 MobileMenu.propTypes = {
   history: PropTypes.shape().isRequired,
-  classes: PropTypes.shape().isRequired,
   mobileMoreAnchorEl: PropTypes.shape(),
   dispatch: PropTypes.func.isRequired,
 };

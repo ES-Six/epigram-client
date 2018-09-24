@@ -32,6 +32,7 @@ const styles = theme => ({
 
 const Login = (props) => {
   const { classes } = props;
+  const { history } = props;
 
   global.console.log('RENDER PARENT');
 
@@ -43,7 +44,7 @@ const Login = (props) => {
             <Grid item xs={12}>
               <h3>Login</h3>
             </Grid>
-            <LoginContainer props={props} />
+            <LoginContainer classes={classes} history={history} />
           </Paper>
         </Grid>
       </Grid>
@@ -53,6 +54,7 @@ const Login = (props) => {
 
 Login.propTypes = {
   classes: PropTypes.shape().isRequired,
+  history: PropTypes.shape().isRequired,
 };
 
 export default withStyles(styles)(Login);

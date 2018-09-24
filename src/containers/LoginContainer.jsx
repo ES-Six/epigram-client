@@ -4,17 +4,17 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import {
   doLogin,
   updateEmail,
   updatePassword,
   setLoginError,
 } from '../actions/Login';
-import { Link } from "react-router-dom";
 
 const LoginContainer = (props) => {
-  const { props: { classes } } = props;
-  const { props: { history } } = props;
+  const { classes } = props;
+  const { history } = props;
   const { loginError } = props;
 
   const handleChange = action => (event) => {
@@ -28,7 +28,6 @@ const LoginContainer = (props) => {
 
   return (
     <div>
-      {global.console.log('RENDER CHILD')}
       {errorField}
       <form
         className={classes.container}
@@ -36,7 +35,7 @@ const LoginContainer = (props) => {
           e.preventDefault();
           props.dispatch(doLogin(() => {
             global.console.log('Login success');
-            history.push('/photos');
+            history.push('/home');
           }, () => {
             global.console.log('Login error');
             props.dispatch(setLoginError(true));
@@ -80,18 +79,12 @@ const mapStateToProps = state => ({
 });
 
 LoginContainer.defaultProps = {
-  classes: {},
-  history: {},
   loginError: false,
 };
 
 LoginContainer.propTypes = {
-  props: PropTypes.shape({
-    classes: PropTypes.shape().isRequired,
-    history: PropTypes.shape().isRequired,
-  }).isRequired,
-  classes: PropTypes.shape(),
-  history: PropTypes.shape(),
+  classes: PropTypes.shape().isRequired,
+  history: PropTypes.shape().isRequired,
   dispatch: PropTypes.func.isRequired,
   loginError: PropTypes.bool,
 };

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem/MenuItem';
+import Cookies from 'js-cookie';
 
 import {
   updateMobileMenuAnchor,
@@ -29,6 +30,12 @@ const ProfileMenu = (props) => {
     handleMobileMenuClose();
   };
 
+  const logout = () => {
+    console.log('LOGEDOUT');
+    Cookies.remove('token');
+    history.push('/');
+  };
+
   return (
     <Menu
       anchorEl={anchorEl}
@@ -38,7 +45,7 @@ const ProfileMenu = (props) => {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleClose}>Account managment</MenuItem>
-      <MenuItem onClick={handleClose}>Logout</MenuItem>
+      <MenuItem onClick={() => { handleClose(); logout(); }}>Logout</MenuItem>
     </Menu>
   );
 };

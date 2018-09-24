@@ -45,7 +45,6 @@ const RegisterContainer = (props) => {
 
   return (
     <div>
-      {global.console.log('RENDER CHILD')}
       {errorField}
       <form
         className={classes.container}
