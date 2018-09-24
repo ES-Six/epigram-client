@@ -10,6 +10,7 @@ import {
   updatePassword,
   setLoginError,
 } from '../actions/Login';
+import { Link } from "react-router-dom";
 
 const LoginContainer = (props) => {
   const { props: { classes } } = props;
@@ -64,6 +65,10 @@ const LoginContainer = (props) => {
             onChange={handleChange(updatePassword)}
           />
         </Grid>
+        <br />
+        <Link to="/register">You don’t have an account, create one here.</Link>
+        <br />
+        <br />
         <Button type="submit" variant="contained" color="primary">Login</Button>
       </form>
     </div>
