@@ -12,11 +12,11 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import {
   updateMobileMenuAnchor,
   updateDesktopMenuAnchor,
-} from '../actions/Menu';
+} from '../actions/MenuBar';
 
 const MobileMenu = (props) => {
-  const { props: { classes } } = props;
-  const { props: { history } } = props;
+  const { classes } = props;
+  const { history } = props;
   const { mobileMoreAnchorEl } = props;
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -55,20 +55,16 @@ const MobileMenu = (props) => {
 };
 
 const mapStateToProps = state => ({
-  mobileMoreAnchorEl: state.Menu.mobileMoreAnchorEl,
+  mobileMoreAnchorEl: state.MenuBar.mobileMoreAnchorEl,
 });
 
 MobileMenu.defaultProps = {
-  classes: {},
   mobileMoreAnchorEl: null,
 };
 
 MobileMenu.propTypes = {
-  props: PropTypes.shape({
-    classes: PropTypes.shape().isRequired,
-    history: PropTypes.shape().isRequired,
-  }).isRequired,
-  classes: PropTypes.shape(),
+  history: PropTypes.shape().isRequired,
+  classes: PropTypes.shape().isRequired,
   mobileMoreAnchorEl: PropTypes.shape(),
   dispatch: PropTypes.func.isRequired,
 };

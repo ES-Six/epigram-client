@@ -7,6 +7,9 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import DesktopMenu from '../containers/DesktopMenu';
 import MobileMenu from '../containers/MobileMenu';
 import ProfileMenu from '../containers/ProfileMenu';
+import MenuDrawer from '../containers/MenuDrawer';
+import Button from "@material-ui/core/Button/Button";
+import Drawer from "@material-ui/core/Drawer/Drawer";
 
 
 const styles = theme => ({
@@ -77,22 +80,40 @@ const styles = theme => ({
       display: 'none',
     },
   },
+  list: {
+    width: 250,
+  },
+  fullList: {
+    width: 'auto',
+  },
 });
 
 const MenuBar = (props) => {
   const { classes } = props;
+  const { history } = props;
+  const { categories } = props;
+
+  if (categories.length === 0) {
+    console.log('FETCH_CATEGORIES');
+  }
 
   return (
     <div className={classes.root}>
-      <DesktopMenu props={props} />
-      <ProfileMenu props={props} />
-      <MobileMenu props={props} />
+      <DesktopMenu classes={classes} history={history} />
+      <ProfileMenu history={history} />
+      <MobileMenu classes={classes} history={history} />
+      <MenuDrawer classes={classes} history={history} />
     </div>
   );
 };
 
+MenuBar.defaultProps = {
+  categories: [],
+};
+
 MenuBar.propTypes = {
   classes: PropTypes.shape().isRequired,
+  categories: PropTypes.arrayOf(PropTypes.shape()),
 };
 
 export default withStyles(styles)(MenuBar);

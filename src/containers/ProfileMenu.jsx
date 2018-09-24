@@ -7,11 +7,11 @@ import MenuItem from '@material-ui/core/MenuItem/MenuItem';
 import {
   updateMobileMenuAnchor,
   updateDesktopMenuAnchor,
-} from '../actions/Menu';
+} from '../actions/MenuBar';
 
 
 const ProfileMenu = (props) => {
-  const { props: { history } } = props;
+  const { history } = props;
   const { anchorEl } = props;
   const isMenuOpen = Boolean(anchorEl);
 
@@ -44,7 +44,7 @@ const ProfileMenu = (props) => {
 };
 
 const mapStateToProps = state => ({
-  anchorEl: state.Menu.anchorEl,
+  anchorEl: state.MenuBar.anchorEl,
 });
 
 ProfileMenu.defaultProps = {
@@ -52,9 +52,7 @@ ProfileMenu.defaultProps = {
 };
 
 ProfileMenu.propTypes = {
-  props: PropTypes.shape({
-    history: PropTypes.shape().isRequired,
-  }).isRequired,
+  history: PropTypes.shape().isRequired,
   dispatch: PropTypes.func.isRequired,
   anchorEl: PropTypes.shape(),
 };

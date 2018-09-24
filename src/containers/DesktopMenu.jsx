@@ -16,28 +16,33 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 
 import {
   updateMobileMenuAnchor,
-  updateDesktopMenuAnchor,
-} from '../actions/Menu';
+  updateDesktopMenuAnchor, toggleDrawer
+} from "../actions/MenuBar";
 
 
 const DesktopMenu = (props) => {
-  const { props: { classes } } = props;
-  const { props: { history } } = props;
+  const { classes } = props;
+  const { history } = props;
   const { anchorEl } = props;
+  const { dispatch } = props;
   const isMenuOpen = Boolean(anchorEl);
 
   const handleProfileMenuOpen = (event) => {
-    props.dispatch(updateDesktopMenuAnchor(event.currentTarget));
+    dispatch(updateDesktopMenuAnchor(event.currentTarget));
   };
 
   const handleMobileMenuOpen = (event) => {
-    props.dispatch(updateMobileMenuAnchor(event.currentTarget));
+    dispatch(updateMobileMenuAnchor(event.currentTarget));
+  };
+
+  const setDrawerOpened = open => () => {
+    props.dispatch(toggleDrawer(open));
   };
 
   return (
     <AppBar position="static">
       <Toolbar>
-        <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
+        <IconButton onClick={setDrawerOpened(true)} className={classes.menuButton} color="inherit" aria-label="Open drawer">
           <MenuIcon />
         </IconButton>
         <Typography className={classes.title} variant="title" color="inherit" noWrap>
@@ -83,20 +88,16 @@ const DesktopMenu = (props) => {
 };
 
 const mapStateToProps = state => ({
-  anchorEl: state.Menu.anchorEl,
+  anchorEl: state.MenuBar.anchorEl,
 });
 
 DesktopMenu.defaultProps = {
-  classes: {},
   anchorEl: null,
 };
 
 DesktopMenu.propTypes = {
-  props: PropTypes.shape({
-    classes: PropTypes.shape().isRequired,
-    history: PropTypes.shape().isRequired,
-  }).isRequired,
-  classes: PropTypes.shape(),
+  classes: PropTypes.shape().isRequired,
+  history: PropTypes.shape().isRequired,
   anchorEl: PropTypes.shape(),
   dispatch: PropTypes.func.isRequired,
 };

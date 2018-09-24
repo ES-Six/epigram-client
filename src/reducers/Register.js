@@ -6,7 +6,6 @@ const Register = (state = {
   passwordTooShortError: false,
   emailAlreadyUsedError: false,
 }, action) => {
-  console.log(state);
   switch (action.type) {
     case 'UPDATE_EMAIL': {
       return {
