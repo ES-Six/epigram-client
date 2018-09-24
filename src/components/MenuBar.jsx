@@ -91,11 +91,6 @@ const styles = theme => ({
 const MenuBar = (props) => {
   const { classes } = props;
   const { history } = props;
-  const { categories } = props;
-
-  if (categories.length === 0) {
-    console.log('FETCH_CATEGORIES');
-  }
 
   return (
     <div className={classes.root}>
@@ -108,12 +103,11 @@ const MenuBar = (props) => {
 };
 
 MenuBar.defaultProps = {
-  categories: [],
+
 };
 
 MenuBar.propTypes = {
   classes: PropTypes.shape().isRequired,
-  categories: PropTypes.arrayOf(PropTypes.shape()),
 };
 
 export default withStyles(styles)(MenuBar);

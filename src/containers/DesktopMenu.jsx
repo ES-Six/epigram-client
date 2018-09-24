@@ -63,11 +63,6 @@ const DesktopMenu = (props) => {
         </div>
         <div className={classes.grow} />
         <div className={classes.sectionDesktop}>
-          <IconButton color="inherit">
-            <Badge className={classes.margin} badgeContent={17} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
           <IconButton
             aria-owns={isMenuOpen ? 'material-appbar' : null}
             aria-haspopup="true"

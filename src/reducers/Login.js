@@ -1,6 +1,5 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import config from '../config/config.json';
 
 const Login = (state = { loginError: false }, action) => {
   switch (action.type) {
@@ -19,11 +18,12 @@ const Login = (state = { loginError: false }, action) => {
       };
     }
     case 'DO_LOGIN': {
-      axios.post(`${config.api_url}/user/login`, {
+      axios.post('/user/login', {
         email: state.email,
         password: state.password,
       }).then((response) => {
         Cookies.set('token', response.data.result.token, { expires: 30 });
+        axios.defaults.headers.get['X-API-KEY'] = response.data.result.token;
         action.successCallback();
       }).catch(() => {
         action.errorCallback();

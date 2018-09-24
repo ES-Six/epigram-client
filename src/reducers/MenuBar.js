@@ -18,6 +18,7 @@ const MenuBar = (state = {
       };
     }
     case 'UPDATE_CATEGORIES': {
+      console.log(action.categories);
       return {
         ...state,
         categories: action.categories,

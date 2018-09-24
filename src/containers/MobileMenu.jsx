@@ -4,10 +4,8 @@ import PropTypes from 'prop-types';
 
 import MenuItem from '@material-ui/core/MenuItem/MenuItem';
 import IconButton from '@material-ui/core/IconButton/IconButton';
-import Badge from '@material-ui/core/Badge/Badge';
 import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 
 import {
   updateMobileMenuAnchor,
@@ -36,14 +34,6 @@ const MobileMenu = (props) => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton color="inherit">
-          <Badge className={classes.margin} badgeContent={11} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton color="inherit">
           <AccountCircle />

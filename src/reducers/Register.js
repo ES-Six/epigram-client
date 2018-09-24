@@ -1,5 +1,4 @@
 import axios from 'axios';
-import config from '../config/config.json';
 
 const Register = (state = {
   passwordDoesntMatchError: false,
@@ -51,7 +50,7 @@ const Register = (state = {
         };
       }
 
-      axios.post(`${config.api_url}/user/register`, {
+      axios.post('/user/register', {
         email: state.email,
         password: state.password,
       }).then((response) => {
