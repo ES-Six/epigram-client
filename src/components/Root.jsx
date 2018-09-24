@@ -3,14 +3,14 @@ import { Provider } from 'react-redux';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Login from './Login';
-import App2 from './App2';
+import MenuBar from './MenuBar';
 
 const Root = ({ store }) => (
   <Provider store={store}>
     <Router>
       <div>
         <Route path="/" exact component={Login} />
-        <Route path="/page2" component={App2} />
+        <Route path="/photos" component={MenuBar} />
       </div>
     </Router>
   </Provider>

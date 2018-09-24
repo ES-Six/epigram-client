@@ -35,7 +35,7 @@ const LoginContainer = (props) => {
           e.preventDefault();
           props.dispatch(doLogin(() => {
             global.console.log('Login success');
-            history.push('/page2');
+            history.push('/photos');
           }, () => {
             global.console.log('Login error');
             props.dispatch(setLoginError(true));
