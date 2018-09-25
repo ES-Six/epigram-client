@@ -9,9 +9,9 @@ import MobileMenu from '../containers/MobileMenu';
 import ProfileMenu from '../containers/ProfileMenu';
 import MenuDrawer from '../containers/MenuDrawer';
 import {
-  fetchCategories, updateCategories
-} from "../actions/MenuBar";
-import { fetchPhotos } from "../actions/PhotoGalery";
+  fetchCategories,
+  updateCategories,
+} from '../actions/MenuBar';
 
 const styles = theme => ({
   root: {

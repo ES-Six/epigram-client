@@ -6,6 +6,7 @@ import Login from './Login';
 import Register from './Register';
 import Home from './Home';
 import PhotoGalery from './PhotoGalery';
+import AccountManagement from './AccountManagement';
 
 const Root = ({ store }) => (
   <Provider store={store}>
@@ -15,6 +16,7 @@ const Root = ({ store }) => (
         <Route path="/register" component={Register} />
         <Route path="/home" component={Home} />
         <Route path="/categories/:id" exact component={PhotoGalery} />
+        <Route path="/account" exact component={AccountManagement} />
       </div>
     </Router>
   </Provider>

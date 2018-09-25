@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
+import { Link } from 'react-router-dom';
 import MenuItem from '@material-ui/core/MenuItem/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Cookies from 'js-cookie';
@@ -33,7 +33,7 @@ const MobileMenu = (props) => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem onClick={handleMobileMenuClose}>
+      <MenuItem component={Link} to="/account" onClick={handleMobileMenuClose}>
         <p>Account managment</p>
       </MenuItem>
       <MenuItem onClick={() => { handleMobileMenuClose(); logout(); }}>

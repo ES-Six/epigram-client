@@ -36,7 +36,7 @@ const LoginContainer = (props) => {
       password,
     }).then((response) => {
       Cookies.set('token', response.data.result.token, { expires: 30 });
-      axios.defaults.headers.get['X-API-KEY'] = response.data.result.token;
+      axios.defaults.headers.common['X-API-KEY'] = response.data.result.token;
       history.push('/home');
     }).catch(() => {
       props.dispatch(setLoginError(true));

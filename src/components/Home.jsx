@@ -15,6 +15,9 @@ const styles = () => ({
   buttonCentered: {
     'text-align': 'center',
   },
+  container: {
+    margin: '20px',
+  },
 });
 
 const Home = (props) => {
@@ -24,7 +27,7 @@ const Home = (props) => {
   return (
     <div>
       <MenuBar history={history} />
-      <div>
+      <div className={classes.container}>
         <h2>Welcome to EPIgram</h2>
         <p>
           EPIgram is a new platform using reactJS that allow you

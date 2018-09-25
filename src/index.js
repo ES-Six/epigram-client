@@ -19,7 +19,7 @@ const store = createStore(
 
 const apiKey = Cookies.get('token');
 if (apiKey) {
-  axios.defaults.headers.get['X-API-KEY'] = apiKey;
+  axios.defaults.headers.common['X-API-KEY'] = apiKey;
 }
 axios.defaults.baseURL = config.api_url;
 

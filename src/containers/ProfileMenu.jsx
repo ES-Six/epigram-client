@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem/MenuItem';
 import Cookies from 'js-cookie';
-
+import { Link } from 'react-router-dom';
 import {
   updateMobileMenuAnchor,
   updateDesktopMenuAnchor,
@@ -44,7 +44,7 @@ const ProfileMenu = (props) => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleClose}>Account managment</MenuItem>
+      <MenuItem component={Link} to="/account" onClick={handleClose}>Account managment</MenuItem>
       <MenuItem onClick={() => { handleClose(); logout(); }}>Logout</MenuItem>
     </Menu>
   );

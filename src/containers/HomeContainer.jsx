@@ -8,7 +8,6 @@ import { toggleDrawer } from '../actions/MenuBar';
 
 const HomeContainer = (props) => {
   const { classes } = props;
-  const { history } = props;
 
   const setDrawerOpened = open => () => {
     props.dispatch(toggleDrawer(open));
@@ -21,7 +20,7 @@ const HomeContainer = (props) => {
           <Button onClick={setDrawerOpened(true)} className={classes.largeButton} type="submit" variant="contained" color="primary">Browse photos</Button>
         </Grid>
         <Grid className={classes.buttonCentered} item md={4} sm={4} xs={12}>
-          <Button className={classes.largeButton} type="submit" variant="contained" color="primary">Manage your account</Button>
+          <Button component={Link} to="/account" className={classes.largeButton} type="submit" variant="contained" color="primary">Manage your account</Button>
         </Grid>
         <Grid className={classes.buttonCentered} item md={4} sm={4} xs={12}>
           <Button className={classes.largeButton} type="submit" variant="contained" color="primary">Upload photos</Button>
@@ -33,7 +32,6 @@ const HomeContainer = (props) => {
 
 HomeContainer.propTypes = {
   classes: PropTypes.shape().isRequired,
-  history: PropTypes.shape().isRequired,
   dispatch: PropTypes.func.isRequired,
 };
 
