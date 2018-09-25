@@ -24,6 +24,22 @@ const Register = (state = {
         passwordConfirmation: action.password,
       };
     }
+    case 'PASSWORD_DOESNT_MATCH': {
+      return {
+        ...state,
+        emailAlreadyUsedError: false,
+        passwordDoesntMatchError: true,
+        passwordTooShortError: false,
+      };
+    }
+    case 'PASSWORD_TOO_SHORT': {
+      return {
+        ...state,
+        emailAlreadyUsedError: false,
+        passwordDoesntMatchError: false,
+        passwordTooShortError: true,
+      };
+    }
     case 'EMAIL_ALREADY_USED': {
       return {
         ...state,
@@ -31,35 +47,6 @@ const Register = (state = {
         passwordDoesntMatchError: false,
         passwordTooShortError: false,
       };
-    }
-    case 'DO_REGISTRATION': {
-      if (state.password.length < 6) {
-        return {
-          ...state,
-          emailAlreadyUsedError: false,
-          passwordDoesntMatchError: false,
-          passwordTooShortError: true,
-        };
-      }
-      if (state.password !== state.passwordConfirmation) {
-        return {
-          ...state,
-          emailAlreadyUsedError: false,
-          passwordDoesntMatchError: true,
-          passwordTooShortError: false,
-        };
-      }
-
-      axios.post('/user/register', {
-        email: state.email,
-        password: state.password,
-      }).then((response) => {
-        action.successCallback(response);
-      }).catch((error) => {
-        action.successCallback(error.response);
-      });
-
-      return state;
     }
     case 'LOGIN_ERROR': {
       return {

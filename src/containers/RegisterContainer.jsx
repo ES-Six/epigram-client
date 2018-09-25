@@ -5,17 +5,22 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import {
-  doRegistration,
+  setPasswordDoesntMatchErorr,
   updateEmail,
   updatePassword,
   updatePasswordConfirmation,
   setEmailAlreadyUsedErorr,
+  setPasswordTooShortErorr,
 } from '../actions/Register';
 
 const RegisterContainer = (props) => {
   const { classes } = props;
   const { history } = props;
+  const { email } = props;
+  const { password } = props;
+  const { passwordConfirmation } = props;
   const { passwordDoesntMatchError } = props;
   const { passwordTooShortError } = props;
   const { emailAlreadyUsedError } = props;
@@ -43,22 +48,35 @@ const RegisterContainer = (props) => {
     );
   }
 
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    if (password < 6) {
+      props.dispatch(setPasswordTooShortErorr());
+    }
+    if (password !== passwordConfirmation) {
+      props.dispatch(setPasswordDoesntMatchErorr());
+    }
+
+    axios.post('/user/register', {
+      email,
+      password,
+    }).then(() => {
+      history.push('/');
+    }).catch((error) => {
+      if (error.response.status === 409) {
+        props.dispatch(setEmailAlreadyUsedErorr());
+      } else {
+        global.console.log('Registration Failed: ', error);
+      }
+    });
+  };
+
   return (
     <div>
       {errorField}
       <form
         className={classes.container}
-        onSubmit={(e) => {
-          e.preventDefault();
-          props.dispatch(doRegistration((result) => {
-            if (result.status === 409) {
-              props.dispatch(setEmailAlreadyUsedErorr());
-            } else {
-              global.console.log('Registration success');
-              history.push('/');
-            }
-          }));
-        }}
+        onSubmit={handleFormSubmit}
       >
         <Grid item xs={12}>
           <TextField
@@ -68,6 +86,7 @@ const RegisterContainer = (props) => {
             placeholder="your@email.com"
             className={classes.textField}
             margin="normal"
+            value={email}
             onChange={handleChange(updateEmail)}
           />
         </Grid>
@@ -79,6 +98,7 @@ const RegisterContainer = (props) => {
             type="password"
             autoComplete="current-password"
             margin="normal"
+            value={password}
             onChange={handleChange(updatePassword)}
           />
         </Grid>
@@ -89,6 +109,7 @@ const RegisterContainer = (props) => {
             className={classes.textField}
             type="password"
             margin="normal"
+            value={passwordConfirmation}
             onChange={handleChange(updatePasswordConfirmation)}
           />
         </Grid>
@@ -106,6 +127,9 @@ const mapStateToProps = state => ({
   passwordDoesntMatchError: state.Register.passwordDoesntMatchError,
   passwordTooShortError: state.Register.passwordTooShortError,
   emailAlreadyUsedError: state.Register.emailAlreadyUsedError,
+  email: state.Register.email,
+  password: state.Register.password,
+  passwordConfirmation: state.Register.passwordConfirmation,
 });
 
 RegisterContainer.defaultProps = {
@@ -114,6 +138,9 @@ RegisterContainer.defaultProps = {
   passwordDoesntMatchError: false,
   passwordTooShortError: false,
   emailAlreadyUsedError: false,
+  email: '',
+  password: '',
+  passwordConfirmation: '',
 };
 
 RegisterContainer.propTypes = {
@@ -123,6 +150,9 @@ RegisterContainer.propTypes = {
   passwordDoesntMatchError: PropTypes.bool,
   passwordTooShortError: PropTypes.bool,
   emailAlreadyUsedError: PropTypes.bool,
+  email: PropTypes.string,
+  password: PropTypes.string,
+  passwordConfirmation: PropTypes.string,
 };
 
 export default connect(mapStateToProps)(RegisterContainer);

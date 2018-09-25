@@ -1,8 +1,3 @@
-export const doRegistration = successCallback => ({
-  type: 'DO_REGISTRATION',
-  successCallback,
-});
-
 export const updateEmail = email => ({
   type: 'UPDATE_EMAIL',
   email,
@@ -21,4 +16,12 @@ export const updatePasswordConfirmation = password => ({
 
 export const setEmailAlreadyUsedErorr = () => ({
   type: 'EMAIL_ALREADY_USED',
+});
+
+export const setPasswordDoesntMatchErorr = () => ({
+  type: 'PASSWORD_DOESNT_MATCH',
+});
+
+export const setPasswordTooShortErorr = () => ({
+  type: 'PASSWORD_TOO_SHORT',
 });
