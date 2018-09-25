@@ -5,20 +5,34 @@ import Drawer from '@material-ui/core/Drawer';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import {
   toggleDrawer,
-  updateCategories,
 } from '../actions/MenuBar';
 
 const MenuDrawer = (props) => {
-  const { history } = props;
   const { classes } = props;
   const { openDrawer } = props;
   const { categories } = props;
+  const { isFetching } = props;
 
   let sideList = null;
-  if (categories.length > 0) {
+  if (isFetching) {
+    sideList = (
+      <div className={classes.list}>
+        <ListItem button>
+          <ListItemText primary="Loading..." />
+        </ListItem>
+      </div>
+    );
+  } else if (!isFetching && categories.length === 0) {
+    sideList = (
+      <div className={classes.list}>
+        <ListItem button>
+          <ListItemText primary="No category found" />
+        </ListItem>
+      </div>
+    );
+  } else {
     sideList = (
       <div className={classes.list}>
         {categories.map(category => (
@@ -28,20 +42,6 @@ const MenuDrawer = (props) => {
         ))}
       </div>
     );
-  } else {
-    sideList = (
-      <div className={classes.list}>
-        <ListItem button>
-          <ListItemText primary="Loading..." />
-        </ListItem>
-      </div>
-    );
-
-    axios.get('/categories').then((response) => {
-      props.dispatch(updateCategories(response.data.result));
-    }).catch((error) => {
-      global.console.log(error);
-    });
   }
 
   const setDrawerOpened = open => () => {
@@ -67,6 +67,7 @@ const MenuDrawer = (props) => {
 const mapStateToProps = state => ({
   openDrawer: state.MenuBar.openDrawer,
   categories: state.MenuBar.categories,
+  isFetching: state.MenuBar.isFetching,
 });
 
 MenuDrawer.defaultProps = {
@@ -76,10 +77,10 @@ MenuDrawer.defaultProps = {
 
 MenuDrawer.propTypes = {
   classes: PropTypes.shape().isRequired,
-  history: PropTypes.shape().isRequired,
   dispatch: PropTypes.func.isRequired,
   openDrawer: PropTypes.bool,
   categories: PropTypes.arrayOf(PropTypes.shape()),
+  isFetching: PropTypes.bool.isRequired,
 };
 
 export default connect(mapStateToProps)(MenuDrawer);

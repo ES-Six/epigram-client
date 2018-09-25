@@ -3,6 +3,7 @@ const MenuBar = (state = {
   mobileMoreAnchorEl: null,
   categories: [],
   openDrawer: false,
+  isFetching: false,
 }, action) => {
   switch (action.type) {
     case 'UPDATE_MOBILE_MENU_ANCHOR': {
@@ -18,10 +19,16 @@ const MenuBar = (state = {
       };
     }
     case 'UPDATE_CATEGORIES': {
-      console.log(action.categories);
       return {
         ...state,
+        isFetching: false,
         categories: action.categories,
+      };
+    }
+    case 'IS_FETCHING': {
+      return {
+        ...state,
+        isFetching: action.flag,
       };
     }
     case 'TOGGLE_DRAWER': {

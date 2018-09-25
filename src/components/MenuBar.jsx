@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-
 import { fade } from '@material-ui/core/styles/colorManipulator';
-
+import compose from 'recompose/compose';
+import connect from 'react-redux/es/connect/connect';
 import DesktopMenu from '../containers/DesktopMenu';
 import MobileMenu from '../containers/MobileMenu';
 import ProfileMenu from '../containers/ProfileMenu';
 import MenuDrawer from '../containers/MenuDrawer';
+import {
+  fetchCategories,
+} from '../actions/MenuBar';
 
 const styles = theme => ({
   root: {
@@ -85,22 +88,46 @@ const styles = theme => ({
   },
 });
 
-const MenuBar = (props) => {
-  const { classes } = props;
-  const { history } = props;
+class MenuBar extends Component {
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchCategories());
+  }
 
-  return (
-    <div className={classes.root}>
-      <DesktopMenu classes={classes} history={history} />
-      <ProfileMenu history={history} />
-      <MobileMenu classes={classes} history={history} />
-      <MenuDrawer classes={classes} history={history} />
-    </div>
-  );
+  render() {
+    const { classes } = this.props;
+    const { history } = this.props;
+    const { isFetching } = this.props;
+
+    return (
+      <div className={classes.root}>
+        <DesktopMenu classes={classes} history={history} />
+        <ProfileMenu history={history} />
+        <MobileMenu classes={classes} history={history} />
+        <MenuDrawer classes={classes} isFetching={isFetching} />
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  isFetching: state.PhotoGalery.isFetching,
+});
+
+MenuBar.defaultProps = {
+  isFetching: false,
 };
 
 MenuBar.propTypes = {
   classes: PropTypes.shape().isRequired,
+  history: PropTypes.shape().isRequired,
+  isFetching: PropTypes.bool,
+  dispatch: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(MenuBar);
+export default compose(
+  withStyles(styles, {
+    name: 'MenuBar',
+  }),
+  connect(mapStateToProps),
+)(MenuBar);

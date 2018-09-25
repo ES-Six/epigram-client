@@ -83,7 +83,7 @@ PhotoGalery.propTypes = {
 
 export default compose(
   withStyles(styles, {
-    name: 'PhotoGalery'
+    name: 'PhotoGalery',
   }),
   connect(mapStateToProps),
 )(PhotoGalery);

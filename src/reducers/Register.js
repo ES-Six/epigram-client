@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 const Register = (state = {
   passwordDoesntMatchError: false,
   passwordTooShortError: false,

@@ -53,7 +53,7 @@ const PhotoGaleryContainer = (props) => {
               <Paper
                 className={classes.paper}
               >
-                <img className={classes.photos} src={`${config.api_url}${photo.url}`} alt={photo.title}/>
+                <img className={classes.photos} src={`${config.api_url}${photo.url}`} alt={photo.title} />
               </Paper>
             </Grid>
           ))}
