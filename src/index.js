@@ -1,15 +1,21 @@
 /* eslint-env browser */
 import React from 'react';
 import { render } from 'react-dom';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import thunk from 'redux-thunk';
 import epigramApp from './reducers';
 import Root from './components/Root';
 import './css/index.css';
 import config from './config/config.json';
 
-const store = createStore(epigramApp);
+const middleware = [thunk];
+
+const store = createStore(
+  epigramApp,
+  applyMiddleware(...middleware),
+);
 
 const apiKey = Cookies.get('token');
 if (apiKey) {

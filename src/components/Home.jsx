@@ -2,7 +2,7 @@ import { withStyles } from '@material-ui/core/styles';
 import React from 'react';
 import PropTypes from 'prop-types';
 import MenuBar from './MenuBar';
-import HomeContainer from '../containers/Home';
+import HomeContainer from '../containers/HomeContainer';
 
 const styles = () => ({
   loginHorizontalCentering: {
@@ -17,7 +17,7 @@ const styles = () => ({
   },
 });
 
-const Login = (props) => {
+const Home = (props) => {
   const { classes } = props;
   const { history } = props;
 
@@ -40,9 +40,9 @@ const Login = (props) => {
   );
 };
 
-Login.propTypes = {
+Home.propTypes = {
   classes: PropTypes.shape().isRequired,
   history: PropTypes.shape().isRequired,
 };
 
-export default withStyles(styles)(Login);
+export default withStyles(styles)(Home);
