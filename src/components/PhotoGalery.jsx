@@ -13,12 +13,44 @@ const styles = theme => ({
   },
   paper: {
     padding: theme.spacing.unit * 2,
-    height: '100%',
     color: theme.palette.text.secondary,
+    margin: '15px',
+    width: '300px',
+    height: '400px',
+    'text-align': 'center',
+  },
+  photoContainer: {
+    width: '300px',
+    height: '250px',
+    position: 'relative',
   },
   photos: {
-    width: '350px',
-    height: '350px',
+    width: 'auto',
+    'max-width': '250px',
+    'max-height': '250px',
+    overflow: 'auto',
+    margin: 'auto',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  },
+  photoTitle: {
+    height: '28px',
+    'text-overflow': 'ellipsis',
+    'white-space': 'nowrap',
+    overflow: 'hidden',
+  },
+  photoDescription: {
+    height: '75px',
+    overflow: 'hidden',
+    display: '-webkit-box',
+    '-webkit-line-clamp': 4,
+    '-webkit-box-orient': 'vertical',
+    'text-overflow': 'ellipsis',
+    width: '300px',
+    'word-wrap': 'break-word',
   },
 });
 
@@ -30,7 +62,6 @@ class PhotoGalery extends Component {
     } = this.props;
 
     dispatch(fetchPhotos(match.params.id));
-    console.log('Refresh at mount');
   }
 
   componentWillReceiveProps(nextProps) {
@@ -41,7 +72,6 @@ class PhotoGalery extends Component {
 
     if (nextProps.match.params.id !== match.params.id) {
       dispatch(fetchPhotos(nextProps.match.params.id));
-      console.log('Refresh needed');
     }
   }
 
@@ -51,8 +81,6 @@ class PhotoGalery extends Component {
       history,
       isFetching,
     } = this.props;
-
-    global.console.log('PARENT RENDERED');
 
     return (
       <div>

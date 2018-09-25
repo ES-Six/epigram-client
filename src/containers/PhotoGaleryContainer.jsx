@@ -13,8 +13,6 @@ const PhotoGaleryContainer = (props) => {
   const { photos } = props;
   let tiles = null;
 
-  global.console.log('CHILD RENDERED');
-
   if (isFetching) {
     tiles = (
       <Grid item xs={12}>
@@ -53,7 +51,24 @@ const PhotoGaleryContainer = (props) => {
               <Paper
                 className={classes.paper}
               >
-                <img className={classes.photos} src={`${config.api_url}${photo.url}`} alt={photo.title} />
+                <div className={classes.photoContainer}>
+                  <img className={classes.photos} src={`${config.api_url}${photo.url}`} alt={photo.title} />
+                </div>
+                <h3 className={classes.photoTitle}>{photo.title}</h3>
+                <p className={classes.photoDescription}>
+                  {
+                    /*
+                     * ESLint rule disabled for this line because
+                     * it's explicitely indicated here by the author of the rule
+                     * https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-array-index-key.md
+                     */
+                  photo.description.split('\n').map((line, key) => (
+                    <span key={key /* eslint-disable-line react/no-array-index-key */}>
+                      {line}
+                      <br />
+                    </span>
+                  ))}
+                </p>
               </Paper>
             </Grid>
           ))}

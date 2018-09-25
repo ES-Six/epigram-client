@@ -9,8 +9,9 @@ import MobileMenu from '../containers/MobileMenu';
 import ProfileMenu from '../containers/ProfileMenu';
 import MenuDrawer from '../containers/MenuDrawer';
 import {
-  fetchCategories,
-} from '../actions/MenuBar';
+  fetchCategories, updateCategories
+} from "../actions/MenuBar";
+import { fetchPhotos } from "../actions/PhotoGalery";
 
 const styles = theme => ({
   root: {
@@ -94,6 +95,17 @@ class MenuBar extends Component {
     dispatch(fetchCategories());
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { dispatch } = this.props;
+    const { categories } = this.props;
+
+    if (categories.length < nextProps.categories.length) {
+      dispatch(updateCategories(nextProps.categories));
+    } else {
+      dispatch(updateCategories(nextProps.categories));
+    }
+  }
+
   render() {
     const { classes } = this.props;
     const { history } = this.props;
@@ -111,11 +123,13 @@ class MenuBar extends Component {
 }
 
 const mapStateToProps = state => ({
-  isFetching: state.PhotoGalery.isFetching,
+  isFetching: state.MenuBar.isFetching,
+  categories: state.MenuBar.categories,
 });
 
 MenuBar.defaultProps = {
   isFetching: false,
+  categories: [],
 };
 
 MenuBar.propTypes = {
@@ -123,6 +137,7 @@ MenuBar.propTypes = {
   history: PropTypes.shape().isRequired,
   isFetching: PropTypes.bool,
   dispatch: PropTypes.func.isRequired,
+  categories: PropTypes.arrayOf(PropTypes.shape()),
 };
 
 export default compose(
