@@ -87,6 +87,10 @@ const styles = theme => ({
   fullList: {
     width: 'auto',
   },
+  typography: {
+    color: 'white',
+    'text-decoration': 'none',
+  },
 });
 
 class MenuBar extends Component {

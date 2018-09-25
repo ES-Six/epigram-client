@@ -1,18 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
+import { Link } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Input from '@material-ui/core/Input';
-import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 
 import {
   updateMobileMenuAnchor,
@@ -46,7 +44,7 @@ const DesktopMenu = (props) => {
           <MenuIcon />
         </IconButton>
         <Typography className={classes.title} variant="title" color="inherit" noWrap>
-          EPIgram
+          <Link to="/home" className={classes.typography}>EPIgram</Link>
         </Typography>
         <div className={classes.search}>
           <div className={classes.searchIcon}>

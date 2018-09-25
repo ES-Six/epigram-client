@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
-import { Link } from 'react-router-dom';
 import config from '../config/config';
 
 const PhotoGaleryContainer = (props) => {
