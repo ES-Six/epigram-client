@@ -13,11 +13,13 @@ import {
   updatePasswordConfirmation,
   setEmailAlreadyUsedErorr,
   setPasswordTooShortErorr,
+  updateUsername,
 } from '../actions/Register';
 
 const RegisterContainer = (props) => {
   const { classes } = props;
   const { history } = props;
+  const { username } = props;
   const { email } = props;
   const { password } = props;
   const { passwordConfirmation } = props;
@@ -58,6 +60,7 @@ const RegisterContainer = (props) => {
     }
 
     axios.post('/user/register', {
+      username,
       email,
       password,
     }).then(() => {
@@ -78,6 +81,17 @@ const RegisterContainer = (props) => {
         className={classes.container}
         onSubmit={handleFormSubmit}
       >
+        <Grid item xs={12}>
+          <TextField
+            required
+            label="Username"
+            type="text"
+            className={classes.textField}
+            margin="normal"
+            value={username}
+            onChange={handleChange(updateUsername)}
+          />
+        </Grid>
         <Grid item xs={12}>
           <TextField
             required
@@ -127,6 +141,7 @@ const mapStateToProps = state => ({
   passwordDoesntMatchError: state.Register.passwordDoesntMatchError,
   passwordTooShortError: state.Register.passwordTooShortError,
   emailAlreadyUsedError: state.Register.emailAlreadyUsedError,
+  username: state.Register.username,
   email: state.Register.email,
   password: state.Register.password,
   passwordConfirmation: state.Register.passwordConfirmation,
@@ -138,6 +153,7 @@ RegisterContainer.defaultProps = {
   passwordDoesntMatchError: false,
   passwordTooShortError: false,
   emailAlreadyUsedError: false,
+  username: '',
   email: '',
   password: '',
   passwordConfirmation: '',
@@ -150,6 +166,7 @@ RegisterContainer.propTypes = {
   passwordDoesntMatchError: PropTypes.bool,
   passwordTooShortError: PropTypes.bool,
   emailAlreadyUsedError: PropTypes.bool,
+  username: PropTypes.string,
   email: PropTypes.string,
   password: PropTypes.string,
   passwordConfirmation: PropTypes.string,

@@ -1,3 +1,8 @@
+export const updateUsername = username => ({
+  type: 'UPDATE_USERNAME',
+  username,
+});
+
 export const updateEmail = email => ({
   type: 'UPDATE_EMAIL',
   email,
@@ -12,7 +17,6 @@ export const updatePasswordConfirmation = password => ({
   type: 'UPDATE_PASSWORD_CONFIRMATION',
   password,
 });
-
 
 export const setEmailAlreadyUsedErorr = () => ({
   type: 'EMAIL_ALREADY_USED',

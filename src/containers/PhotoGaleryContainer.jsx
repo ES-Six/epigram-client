@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField/TextField';
+import Button from '@material-ui/core/Button/Button';
 import config from '../config/config';
 import {
   updateChatMessage,
 } from '../actions/PhotoGalery';
-import Button from "@material-ui/core/Button/Button";
 
 const PhotoGaleryContainer = (props) => {
   const { classes } = props;

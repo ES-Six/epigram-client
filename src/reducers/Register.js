@@ -4,6 +4,12 @@ const Register = (state = {
   emailAlreadyUsedError: false,
 }, action) => {
   switch (action.type) {
+    case 'UPDATE_USERNAME': {
+      return {
+        ...state,
+        username: action.username,
+      };
+    }
     case 'UPDATE_EMAIL': {
       return {
         ...state,
