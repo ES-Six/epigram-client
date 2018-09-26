@@ -1,3 +1,4 @@
 {
-  "api_url": "http://epigramapi-env.kiusnt23np.eu-west-3.elasticbeanstalk.com/api/v1"
+  "api_url": "http://epigramapi-env.kiusnt23np.eu-west-3.elasticbeanstalk.com/api/v1",
+  "api_websocket": "http://epigramapi-env.kiusnt23np.eu-west-3.elasticbeanstalk.com"
 }

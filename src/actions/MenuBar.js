@@ -25,11 +25,15 @@ export const isFetching = flag => ({
   flag,
 });
 
-export const fetchCategories = () => (dispatch) => {
+export const fetchCategories = (nbretry = 0) => (dispatch) => {
   dispatch(isFetching(true));
   const request = axios.get('/categories');
   return request.then(
     response => dispatch(updateCategories(response.data.result)),
-    err => dispatch(updateCategories(err)),
+    (error) => {
+      if (!error.status && nbretry < 5) {
+        dispatch(fetchCategories(nbretry + 1));
+      }
+    },
   );
 };

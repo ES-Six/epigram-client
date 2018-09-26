@@ -1,5 +1,6 @@
 const PhotoGalery = (state = {
   photos: [],
+  messages: [],
   isFetching: false,
   chatMessage: '',
 }, action) => {
@@ -17,16 +18,14 @@ const PhotoGalery = (state = {
         isFetching: action.flag,
       };
     }
+    case 'ADD_MESSAGES': {
+      state.messages.push(action.message);
+      return state;
+    }
     case 'UPDATE_USER_MESSAGE': {
       return {
         ...state,
         chatMessage: action.chatMessage,
-      };
-    }
-    case 'UPDATE_CHAT': {
-      return {
-        ...state,
-        messages: action.message,
       };
     }
     default:

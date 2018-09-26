@@ -11,7 +11,6 @@ import './css/index.css';
 import config from './config/config.json';
 
 const middleware = [thunk];
-
 const store = createStore(
   epigramApp,
   applyMiddleware(...middleware),

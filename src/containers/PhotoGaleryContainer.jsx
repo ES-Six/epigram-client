@@ -3,29 +3,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField/TextField';
-import Button from '@material-ui/core/Button/Button';
 import config from '../config/config';
-import {
-  updateChatMessage,
-} from '../actions/PhotoGalery';
 
 const PhotoGaleryContainer = (props) => {
   const { classes } = props;
   const { history } = props;
   const { isFetching } = props;
   const { photos } = props;
-  const { chatMessage } = props;
-  const { dispatch } = props;
   let tiles = null;
-
-  const handlePostChatMessage = (e) => {
-    e.preventDefault();
-  };
-
-  const handleChange = action => (event) => {
-    dispatch(action(event.target.value));
-  };
 
   if (isFetching) {
     tiles = (
@@ -92,52 +77,6 @@ const PhotoGaleryContainer = (props) => {
 
   return (
     <div>
-      <Grid id="chat-container" className={classes.chatContainer} item xs={12}>
-        <Paper id="chat-paper" className={classes.chatPaper}>
-          <Grid item xs={12}>
-            <h3 className={classes.chatTitle}>Chat</h3>
-            <form onSubmit={handlePostChatMessage}>
-              <div id="chat-messages" className={classes.chatMessagesContainer}>
-                <ul className={classes.chatMessageList}>
-                  <li>User : Hellooooo</li>
-                  <li>You : Helloooooo</li>
-                  <li>User : Hellooooo ooooo ooooo ooooo</li>
-                  <li>User : Hellooooo ooooo ooooo ooooo</li>
-                  <li>User : Hellooooo ooooo ooooo ooooo</li>
-                  <li>User : Hellooooo ooooo ooooo ooooo</li>
-                  <li>User : Hellooooo ooooo ooooo ooooo</li>
-                  <li>User : Hellooooo ooooo ooooo ooooo</li>
-                  <li>User : Hellooooo ooooo ooooo ooooo</li>
-                  <li>User : Hellooooo ooooo ooooo ooooo</li>
-                  <li>User : Hellooooo ooooo ooooo ooooo</li>
-                  <li>User : Hellooooo ooooo ooooo ooooo</li>
-                  <li>User : Hellooooo ooooo ooooo ooooo</li>
-                  <li>User : Hellooooo ooooo ooooo ooooo</li>
-                  <li>User : Hellooooo ooooo ooooo ooooo</li>
-                  <li>User : Hellooooo ooooo ooooo ooooo</li>
-                  <li>User : Hellooooo ooooo ooooo ooooo</li>
-                  <li>User : Hellooooo ooooo ooooo ooooo</li>
-                  <li>User : Hellooooo ooooo ooooo ooooo</li>
-                  <li>User : Hellooooo ooooo ooooo ooooo</li>
-                </ul>
-              </div>
-              <div className={classes.chatInputContainer}>
-                <TextField
-                  required
-                  label="Message"
-                  type="text"
-                  placeholder="Type a message"
-                  className={[classes.chatInput, 'chat-input'].join(' ')}
-                  margin="normal"
-                  value={chatMessage}
-                  onChange={handleChange(updateChatMessage)}
-                />
-                <Button type="submit" variant="contained" color="primary">Send</Button>
-              </div>
-            </form>
-          </Grid>
-        </Paper>
-      </Grid>
       {tiles}
     </div>
   );
@@ -145,22 +84,18 @@ const PhotoGaleryContainer = (props) => {
 
 PhotoGaleryContainer.defaultProps = {
   photos: [],
-  chatMessage: '',
 };
 
 PhotoGaleryContainer.propTypes = {
   classes: PropTypes.shape().isRequired,
   history: PropTypes.shape().isRequired,
   isFetching: PropTypes.bool.isRequired,
-  dispatch: PropTypes.func.isRequired,
   photos: PropTypes.arrayOf(PropTypes.shape()),
-  chatMessage: PropTypes.string,
 };
 
 const mapStateToProps = state => ({
   photos: state.PhotoGalery.photos,
   isFetching: state.PhotoGalery.isFetching,
-  chatMessage: state.PhotoGalery.chatMessage,
 });
 
 export default connect(mapStateToProps)(PhotoGaleryContainer);
