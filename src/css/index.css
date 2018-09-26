@@ -8,3 +8,13 @@ body {
   margin: 0;
   padding: 0;
 }
+
+@media (max-width: 580px) {
+  #chat-messages {
+    height: 240px;
+  }
+
+  .chat-input {
+    width: 95% !important;
+  }
+}

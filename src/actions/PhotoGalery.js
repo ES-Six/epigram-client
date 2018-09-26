@@ -10,6 +10,11 @@ export const isFetching = flag => ({
   flag,
 });
 
+export const updateChatMessage = chatMessage => ({
+  type: 'UPDATE_USER_MESSAGE',
+  chatMessage,
+});
+
 export const fetchPhotos = categoryId => (dispatch) => {
   dispatch(isFetching(true));
   const request = axios.get(`/category/${categoryId}/photos`);

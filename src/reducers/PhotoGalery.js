@@ -1,6 +1,7 @@
 const PhotoGalery = (state = {
   photos: [],
   isFetching: false,
+  chatMessage: '',
 }, action) => {
   switch (action.type) {
     case 'UPDATE_PHOTO_TILES': {
@@ -14,6 +15,12 @@ const PhotoGalery = (state = {
       return {
         ...state,
         isFetching: action.flag,
+      };
+    }
+    case 'UPDATE_USER_MESSAGE': {
+      return {
+        ...state,
+        chatMessage: action.chatMessage,
       };
     }
     case 'UPDATE_CHAT': {

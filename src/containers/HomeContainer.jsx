@@ -23,7 +23,7 @@ const HomeContainer = (props) => {
           <Button component={Link} to="/account" className={classes.largeButton} type="submit" variant="contained" color="primary">Manage your account</Button>
         </Grid>
         <Grid className={classes.buttonCentered} item md={4} sm={4} xs={12}>
-          <Button className={classes.largeButton} type="submit" variant="contained" color="primary">Upload photos</Button>
+          <Button component={Link} to="/upload" className={classes.largeButton} type="submit" variant="contained" color="primary">Upload photos</Button>
         </Grid>
       </Grid>
     </Grid>

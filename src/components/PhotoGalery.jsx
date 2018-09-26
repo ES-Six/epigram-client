@@ -52,6 +52,35 @@ const styles = theme => ({
     width: '300px',
     'word-wrap': 'break-word',
   },
+  chatPaper: {
+    height: '400px',
+    margin: '15px',
+    width: '91%',
+    'margin-left': 'auto',
+    'margin-right': 'auto',
+  },
+  chatTitle: {
+    margin: '15px',
+    'text-align': 'center',
+  },
+  chatInputContainer: {
+    width: '100%',
+    margin: '5px',
+    display: 'inline-block',
+    'text-align': 'center',
+  },
+  chatInput: {
+    width: '80%',
+    'margin-right': '10px',
+    'margin-left': 'auto',
+  },
+  chatMessagesContainer: {
+    height: '280px',
+    'overflow-y': 'auto',
+  },
+  chatMessageList: {
+    'list-style': 'none',
+  },
 });
 
 class PhotoGalery extends Component {
