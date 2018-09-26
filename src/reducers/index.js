@@ -5,6 +5,7 @@ import Register from './Register';
 import PhotoGalery from './PhotoGalery';
 import AccountManagement from './AccountManagement';
 import UserGalery from './UserGalery';
+import PhotoUpload from './PhotoUpload';
 
 export default combineReducers({
   Login,
@@ -13,4 +14,5 @@ export default combineReducers({
   PhotoGalery,
   AccountManagement,
   UserGalery,
+  PhotoUpload,
 });

@@ -4,8 +4,10 @@ import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import connect from 'react-redux/es/connect/connect';
 import Button from '@material-ui/core/Button/Button';
+import Grid from '@material-ui/core/Grid/Grid';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { Link } from 'react-router-dom';
 import UserGaleryContainer from '../containers/UserGaleryContainer';
 import { fetchUser, updateUser } from '../actions/AccountManagement';
 import { fetchUserPhotos, updatePhotoTiles } from '../actions/UserGalery';
@@ -60,6 +62,27 @@ const styles = theme => ({
     'text-overflow': 'ellipsis',
     width: '300px',
     'word-wrap': 'break-word',
+  },
+  loginHorizontalCentering: {
+    margin: 'auto',
+    'max-width': '500px',
+  },
+  largeButton: {
+    width: '142px',
+  },
+  rightButton: {
+    'text-align': 'center',
+    'margin-right': 'auto',
+  },
+  leftButton: {
+    'text-align': 'center',
+    'margin-left': 'auto',
+  },
+  container: {
+    margin: '20px',
+  },
+  accountButton: {
+    width: '150px',
   },
 });
 
@@ -132,7 +155,16 @@ class AccountManagement extends Component {
           <h3>Account management</h3>
           <p>On this page, you can delete your account and manage your photos</p>
           {userInfos}
-          <Button onClick={handleAccountDeletion} variant="contained" color="primary">Delete account</Button>
+          <Grid className={classes.loginHorizontalCentering} item xs={12} sm={8} md={8}>
+            <Grid container spacing={24}>
+              <Grid className={classes.leftButton} item md={4} sm={4} xs={12}>
+                <Button className={classes.accountButton} onClick={handleAccountDeletion} variant="contained" color="primary">Delete account</Button>
+              </Grid>
+              <Grid className={classes.rightButton} item md={4} sm={4} xs={12}>
+                <Button className={classes.accountButton} component={Link} to="/upload" variant="contained" color="primary">Upload photo</Button>
+              </Grid>
+            </Grid>
+          </Grid>
         </div>
         <UserGaleryContainer classes={classes} history={history} isFetching={isFetchingPhotos} />
       </div>
