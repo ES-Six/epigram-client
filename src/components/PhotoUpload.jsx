@@ -6,14 +6,16 @@ import connect from 'react-redux/es/connect/connect';
 import Button from '@material-ui/core/Button/Button';
 import Grid from '@material-ui/core/Grid/Grid';
 import TextField from '@material-ui/core/TextField/TextField';
-import axios from 'axios';
+import MenuItem from '@material-ui/core/MenuItem';
 import { Link } from 'react-router-dom';
 import MenuBar from './MenuBar';
 import {
   updateTitle,
   updateDescription,
   uploadPhoto,
+  updateSelectedCategory,
 } from '../actions/PhotoUpload';
+import { fetchPhotos } from "../actions/PhotoGalery";
 
 const styles = theme => ({
   loginHorizontalCentering: {
@@ -29,12 +31,31 @@ const styles = theme => ({
 });
 
 class PhotoUpload extends Component {
+  componentDidMount() {
+    const { categories } = this.props;
+    const { dispatch } = this.props;
+
+    if (categories.length > 0 && categories[0]) {
+      dispatch(updateSelectedCategory(categories[0].id));
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { dispatch } = this.props;
+
+    if (nextProps.selectedCategory === 0 && nextProps.categories.length > 0) {
+      dispatch(updateSelectedCategory(nextProps.categories[0].id));
+    }
+  }
+
   render() {
     const { classes } = this.props;
     const { history } = this.props;
     const { isUploading } = this.props;
+    const { selectedCategory } = this.props;
     const { title } = this.props;
     const { description } = this.props;
+    const { categories } = this.props;
     const { dispatch } = this.props;
 
     const handleChange = action => (event) => {
@@ -44,9 +65,16 @@ class PhotoUpload extends Component {
     const handleFile = () => {
       const titleInput = global.document.getElementById('upload-form-title');
       const descriptionInput = global.document.getElementById('upload-form-description');
-
-      if (global.document.querySelector('#upload-form').checkValidity()) {
-        dispatch(uploadPhoto());
+      const fileInput = global.document.getElementById('contained-button-file');
+      const form = global.document.querySelector('#upload-form');
+      if (form.checkValidity()) {
+        const uploadFormData = new global.FormData(form);
+        uploadFormData.append('file', fileInput.files[0]);
+        dispatch(uploadPhoto(selectedCategory, uploadFormData, (response) => {
+          if (response.status === 201) {
+            history.push('/account');
+          }
+        }));
       } else {
         if (titleInput.validity.valueMissing) {
           titleInput.setCustomValidity('Vous devez ajouter un titre à la photo');
@@ -79,6 +107,30 @@ class PhotoUpload extends Component {
             id="upload-form"
             className={classes.container}
           >
+            <Grid item xs={12}>
+              <TextField
+                id="filled-select-categories"
+                select
+                label="Select"
+                className={classes.textField}
+                value={selectedCategory}
+                onChange={handleChange(updateSelectedCategory)}
+                SelectProps={{
+                  MenuProps: {
+                    className: classes.menu,
+                  },
+                }}
+                helperText="Please categorise your photo"
+                margin="normal"
+                variant="filled"
+              >
+                {categories.map(category => (
+                  <MenuItem key={category.id} value={category.id}>
+                    {category.name}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Grid>
             <Grid item xs={12}>
               <TextField
                 id="upload-form-title"
@@ -136,6 +188,7 @@ const mapStateToProps = state => ({
   categories: state.MenuBar.categories,
   title: state.PhotoUpload.title,
   description: state.PhotoUpload.description,
+  selectedCategory: state.PhotoUpload.selectedCategory,
 });
 
 PhotoUpload.defaultProps = {
@@ -143,6 +196,7 @@ PhotoUpload.defaultProps = {
   categories: [],
   title: '',
   description: '',
+  selectedCategory: 0,
 };
 
 PhotoUpload.propTypes = {
@@ -153,6 +207,7 @@ PhotoUpload.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.shape()),
   title: PropTypes.string,
   description: PropTypes.string,
+  selectedCategory: PropTypes.number,
 };
 
 export default compose(

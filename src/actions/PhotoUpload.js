@@ -10,16 +10,25 @@ export const updateDescription = description => ({
   description,
 });
 
+export const updateSelectedCategory = categoryId => ({
+  type: 'UPDATE_SELECT_CATEGORY',
+  categoryId,
+});
+
 export const isUploading = flag => ({
   type: 'IS_UPLOADING',
   flag,
 });
 
-export const uploadPhoto = categoryId => (dispatch) => {
+export const uploadPhoto = (categoryId, formData, uploadSuccessCallback) => (dispatch) => {
   dispatch(isUploading(true));
-  const request = axios.post(`/category/${categoryId}/photo`);
+  const request = axios.post(`/category/${categoryId}/photo`, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
   return request.then(
-    response => global.console.log(response.data),
+    response => uploadSuccessCallback(response),
     err => global.console.log(err),
   );
 };
