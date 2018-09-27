@@ -22,6 +22,12 @@ const PhotoGalery = (state = {
       state.messages.push(action.message);
       return state;
     }
+    case 'CLEAR_CHAT': {
+      return {
+        ...state,
+        messages: [],
+      };
+    }
     case 'UPDATE_USER_MESSAGE': {
       return {
         ...state,

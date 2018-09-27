@@ -15,6 +15,10 @@ export const addMessage = message => ({
   message,
 });
 
+export const clearChatMessage = () => ({
+  type: 'CLEAR_CHAT',
+});
+
 export const updateChatMessage = chatMessage => ({
   type: 'UPDATE_USER_MESSAGE',
   chatMessage,

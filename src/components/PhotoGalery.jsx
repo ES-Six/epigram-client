@@ -8,9 +8,15 @@ import Button from '@material-ui/core/Button/Button';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import openSocket from 'socket.io-client';
+import Cookies from 'js-cookie';
 import config from '../config/config.json';
 import PhotoGaleryContainer from '../containers/PhotoGaleryContainer';
-import { fetchPhotos, addMessage, updateChatMessage } from '../actions/PhotoGalery';
+import {
+  fetchPhotos,
+  addMessage,
+  updateChatMessage,
+  clearChatMessage,
+} from '../actions/PhotoGalery';
 import MenuBar from './MenuBar';
 
 const styles = theme => ({
@@ -86,6 +92,10 @@ const styles = theme => ({
   },
   chatMessageList: {
     'list-style': 'none',
+    padding: 0,
+    'margin-left': '15px',
+    'margin-right': '15px',
+    'word-wrap': 'break-word',
   },
 });
 
@@ -104,13 +114,24 @@ class PhotoGalery extends Component {
 
     socket.on('connect', () => {
       global.console.log('CONNECTED');
-      socket.emit('chanelSubscribe', match.params.id);
+      socket.emit('chanelSubscribe', {
+        chanelId: match.params.id,
+        token: Cookies.get('token'),
+      });
     });
 
     socket.on('newMessage', (data) => {
       dispatch(addMessage(data));
       global.console.log('NEW Message: ', data);
       this.forceUpdate();
+    });
+
+    socket.on('connectedToChanel', (msg) => {
+      global.console.log('CONNECT STATUS:', msg);
+    });
+
+    socket.on('cannotConnectToChanel', (err) => {
+      global.console.log('CONNECT ERROR:', err);
     });
 
     socket.on('disconnect', (event) => {
@@ -138,7 +159,12 @@ class PhotoGalery extends Component {
     if (nextProps.match.params.id !== match.params.id) {
       dispatch(fetchPhotos(nextProps.match.params.id));
       if (socket) {
-        socket.emit('chanelSubscribe', nextProps.match.params.id);
+        dispatch(updateChatMessage(''));
+        dispatch(clearChatMessage());
+        socket.emit('chanelSubscribe', {
+          chanelId: nextProps.match.params.id,
+          token: Cookies.get('token'),
+        });
       }
     }
   }
@@ -161,6 +187,10 @@ class PhotoGalery extends Component {
     const handlePostChatMessage = (e) => {
       e.preventDefault();
       socket.emit('sendMessage', chatMessage);
+      dispatch(addMessage({
+        message: chatMessage,
+        username: 'You',
+      }));
       dispatch(updateChatMessage(''));
     };
 
@@ -185,12 +215,15 @@ class PhotoGalery extends Component {
                          * it's explicitely indicated here by the author of the rule
                          * https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-array-index-key.md
                          */
-                        messages.map(message => (
-                          <li
-                            key={message.id /* eslint-disable-line react/no-array-index-key */}
-                          >
-                            { message.message }
-                          </li>
+                        messages.map((message, index) => (
+                          <div key={index /* eslint-disable-line react/no-array-index-key */}>
+                            <li>
+                              { message.username }
+                              :
+                              { message.message }
+                            </li>
+                            {messages.length > index + 1 ? <hr /> : null}
+                          </div>
                         ))}
                     </ul>
                   </div>
