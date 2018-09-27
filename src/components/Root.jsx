@@ -8,6 +8,7 @@ import Home from './Home';
 import PhotoGalery from './PhotoGalery';
 import AccountManagement from './AccountManagement';
 import PhotoUpload from './PhotoUpload';
+import PhotoDetails from './PhotoDetails';
 
 const Root = ({ store }) => (
   <Provider store={store}>
@@ -19,6 +20,7 @@ const Root = ({ store }) => (
         <Route path="/categories/:id" exact component={PhotoGalery} />
         <Route path="/account" exact component={AccountManagement} />
         <Route path="/upload" exact component={PhotoUpload} />
+        <Route path="/photo/:id" exact component={PhotoDetails} />
       </div>
     </Router>
   </Provider>

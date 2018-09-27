@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-export const updatePhotoTiles = photos => ({
-  type: 'UPDATE_PHOTO_TILES',
-  photos,
+export const updatePhoto = photo => ({
+  type: 'UPDATE_PHOTO',
+  photo,
 });
 
 export const isFetching = flag => ({
@@ -10,29 +10,71 @@ export const isFetching = flag => ({
   flag,
 });
 
-export const addMessage = message => ({
-  type: 'ADD_MESSAGES',
-  message,
+export const updateComment = comment => ({
+  type: 'UPDATE_COMMENT',
+  comment,
 });
 
-export const clearChatMessage = () => ({
-  type: 'CLEAR_CHAT',
+export const updateComments = comments => ({
+  type: 'UPDATE_COMMENTS',
+  comments,
 });
 
-export const updateChatMessage = chatMessage => ({
-  type: 'UPDATE_USER_MESSAGE',
-  chatMessage,
+export const isFetchingComments = flag => ({
+  type: 'IS_FETCHING_COMMENTS',
+  flag,
 });
 
-export const fetchPhotos = (categoryId, nbretry = 0) => (dispatch) => {
+export const updateUserLike = flag => ({
+  type: 'UPDATE_USER_LIKE',
+  flag,
+});
+
+export const updateUserDislike = flag => ({
+  type: 'UPDATE_USER_DISLIKE',
+  flag,
+});
+
+export const fetchPhoto = photoId => (dispatch) => {
   dispatch(isFetching(true));
-  const request = axios.get(`/category/${categoryId}/photos`);
+  const request = axios.get(`/photo/${photoId}/info`);
   return request.then(
-    response => dispatch(updatePhotoTiles(response.data.result)),
+    response => dispatch(updatePhoto(response.data.result)),
     (error) => {
-      if (!error.status && nbretry < 5) {
-        dispatch(fetchPhotos(categoryId, nbretry + 1));
+      global.console.log(error);
+    },
+  );
+};
+
+export const fetchComments = photoId => (dispatch) => {
+  dispatch(isFetchingComments(true));
+  const request = axios.get(`/photo/${photoId}/comments`);
+  return request.then(
+    response => dispatch(updateComments(response.data.result)),
+    (error) => {
+      global.console.log(error);
+    },
+  );
+};
+
+export const fetchUserOpinion = photoId => (dispatch) => {
+  dispatch(isFetchingComments(true));
+  const request = axios.get(`/photo/${photoId}/opinion`);
+  return request.then(
+    (response) => {
+      if (response.data.result.opinion === 'LIKE') {
+        dispatch(updateUserLike(true));
+        dispatch(updateUserDislike(false));
+      } else if (response.data.result.opinion === 'DISLIKE') {
+        dispatch(updateUserLike(false));
+        dispatch(updateUserDislike(true));
+      } else {
+        dispatch(updateUserLike(false));
+        dispatch(updateUserDislike(false));
       }
+    },
+    (error) => {
+      global.console.log(error);
     },
   );
 };

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
+import { Link } from 'react-router-dom';
 import config from '../config/config';
 
 const UserGaleryContainer = (props) => {
@@ -50,9 +51,15 @@ const UserGaleryContainer = (props) => {
                 className={classes.paper}
               >
                 <div className={classes.photoContainer}>
-                  <img className={classes.photos} src={`${config.api_url}${photo.url}`} alt={photo.title} />
+                  <Link to={`/photo/${photo.id}`}>
+                    <img className={classes.photos} src={`${config.api_url}${photo.url}`} alt={photo.title} />
+                  </Link>
                 </div>
-                <h3 className={classes.photoTitle}>{photo.title}</h3>
+                <h3 className={classes.photoTitle}>
+                  <Link to={`/photo/${photo.id}`} className={classes.rmLinkStyle}>
+                    {photo.title}
+                  </Link>
+                </h3>
                 <p className={classes.photoDescription}>
                   {
                     /*

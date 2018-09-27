@@ -7,17 +7,16 @@ import Button from '@material-ui/core/Button/Button';
 import Grid from '@material-ui/core/Grid/Grid';
 import TextField from '@material-ui/core/TextField/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
-import { Link } from 'react-router-dom';
 import MenuBar from './MenuBar';
+
 import {
   updateTitle,
   updateDescription,
   uploadPhoto,
   updateSelectedCategory,
 } from '../actions/PhotoUpload';
-import { fetchPhotos } from "../actions/PhotoGalery";
 
-const styles = theme => ({
+const styles = () => ({
   loginHorizontalCentering: {
     margin: 'auto',
     'max-width': '500px',
@@ -90,13 +89,6 @@ class PhotoUpload extends Component {
         }
       }
     };
-
-    let uploading = null;
-    if (isUploading) {
-      uploading = (
-        <p>Loading...</p>
-      );
-    }
 
     return (
       <div>
@@ -171,7 +163,7 @@ class PhotoUpload extends Component {
                   type="file"
                   onChange={handleFile}
                 />
-                <Button variant="contained" color="primary" component="span" className={classes.button}>
+                <Button variant="contained" color="primary" component="span" className={classes.button} disabled={isUploading}>
                   Choose photo to upload
                 </Button>
               </label>

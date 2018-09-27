@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import { Link } from 'react-router-dom';
 import config from '../config/config';
 
 const PhotoGaleryContainer = (props) => {
   const { classes } = props;
-  const { history } = props;
   const { isFetching } = props;
   const { photos } = props;
   let tiles = null;
@@ -51,9 +51,15 @@ const PhotoGaleryContainer = (props) => {
                 className={classes.paper}
               >
                 <div className={classes.photoContainer}>
-                  <img className={classes.photos} src={`${config.api_url}${photo.url}`} alt={photo.title} />
+                  <Link to={`/photo/${photo.id}`}>
+                    <img className={classes.photos} src={`${config.api_url}${photo.url}`} alt={photo.title} />
+                  </Link>
                 </div>
-                <h3 className={classes.photoTitle}>{photo.title}</h3>
+                <h3 className={classes.photoTitle}>
+                  <Link className={classes.rmLinkStyle} to={`/photo/${photo.id}`}>
+                    {photo.title}
+                  </Link>
+                </h3>
                 <p className={classes.photoDescription}>
                   {
                     /*
@@ -88,7 +94,6 @@ PhotoGaleryContainer.defaultProps = {
 
 PhotoGaleryContainer.propTypes = {
   classes: PropTypes.shape().isRequired,
-  history: PropTypes.shape().isRequired,
   isFetching: PropTypes.bool.isRequired,
   photos: PropTypes.arrayOf(PropTypes.shape()),
 };

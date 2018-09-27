@@ -5,200 +5,307 @@ import compose from 'recompose/compose';
 import connect from 'react-redux/es/connect/connect';
 import Button from '@material-ui/core/Button/Button';
 import Grid from '@material-ui/core/Grid/Grid';
+import TextField from '@material-ui/core/TextField/TextField';
+import Paper from '@material-ui/core/Paper/Paper';
 import axios from 'axios';
-import Cookies from 'js-cookie';
-import { Link } from 'react-router-dom';
-import UserGaleryContainer from '../containers/UserGaleryContainer';
-import { fetchUser, updateUser } from '../actions/AccountManagement';
-import { fetchUserPhotos, updatePhotoTiles } from '../actions/UserGalery';
 import MenuBar from './MenuBar';
-
-const md5 = require('md5');
+import config from '../config/config';
+import {
+  fetchPhoto,
+  fetchComments,
+  updateComment,
+  updateUserLike,
+  updateUserDislike,
+  fetchUserOpinion,
+} from '../actions/PhotoDetails';
 
 const styles = theme => ({
-  userContainer: {
-    'text-align': 'center',
-  },
   root: {
     flexGrow: 1,
   },
-  paper: {
-    padding: theme.spacing.unit * 2,
-    color: theme.palette.text.secondary,
-    margin: '15px',
-    width: '290px',
-    height: '400px',
-    'text-align': 'center',
+  opinionButton: {
+    margin: theme.spacing.unit,
   },
-  photoContainer: {
-    width: '290px',
-    height: '250px',
-    position: 'relative',
-  },
-  photos: {
-    width: 'auto',
-    'max-width': '250px',
-    'max-height': '250px',
-    overflow: 'auto',
-    margin: 'auto',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-  },
-  photoTitle: {
-    height: '28px',
-    'text-overflow': 'ellipsis',
-    'white-space': 'nowrap',
-    overflow: 'hidden',
-  },
-  photoDescription: {
-    height: '75px',
-    overflow: 'hidden',
-    display: '-webkit-box',
-    '-webkit-line-clamp': 4,
-    '-webkit-box-orient': 'vertical',
-    'text-overflow': 'ellipsis',
-    width: '300px',
-    'word-wrap': 'break-word',
+  textField: {
+    width: '100%',
   },
   loginHorizontalCentering: {
     margin: 'auto',
     'max-width': '500px',
   },
-  largeButton: {
-    width: '142px',
+  paper: {
+    padding: theme.spacing.unit * 2,
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+    'margin-top': '15px',
+    'margin-bottom': '15px',
   },
-  rightButton: {
+  photo: {
+    width: 'auto',
+    'max-width': '100%',
+    height: 'auto',
+  },
+  photoContainer: {
     'text-align': 'center',
-    'margin-right': 'auto',
+    margin: '20px 15px 0px 15px',
   },
-  leftButton: {
-    'text-align': 'center',
-    'margin-left': 'auto',
+  opinionIcons: {
+    'font-size': '35px',
   },
-  container: {
-    margin: '20px',
+  buttonGreen: {
+    background: '#4caf50',
   },
-  accountButton: {
-    width: '150px',
+  buttonRed: {
+    background: '#f50057',
+  },
+  commentsContainer: {
+    'text-align': 'start',
+    'margin-top': '20px',
   },
 });
 
-class AccountManagement extends Component {
+class PhotoDetails extends Component {
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(fetchUser());
-    dispatch(fetchUserPhotos());
+    const { dispatch, match } = this.props;
+    dispatch(fetchPhoto(match.params.id));
+    dispatch(fetchComments(match.params.id));
+    dispatch(fetchUserOpinion(match.params.id));
   }
 
   componentWillReceiveProps(nextProps) {
-    const { dispatch } = this.props;
-    const { user } = this.props;
+    const { dispatch, match } = this.props;
 
-    if (user.length !== nextProps.user.length) {
-      dispatch(updateUser(nextProps.user));
-    } else {
-      dispatch(updateUser(nextProps.user));
+    if (match.params.id !== nextProps.match.params.id) {
+      dispatch(fetchPhoto(nextProps.match.params.id));
+      dispatch(fetchComments(match.params.id));
+      dispatch(fetchUserOpinion(match.params.id));
     }
-
-    dispatch(updatePhotoTiles(nextProps.photos));
   }
 
   render() {
     const { classes } = this.props;
     const { history } = this.props;
     const { isFetching } = this.props;
-    const { isFetchingPhotos } = this.props;
-    const { user } = this.props;
+    const { isFetchingComments } = this.props;
+    const { comment } = this.props;
+    const { comments } = this.props;
+    const { photo } = this.props;
+    const { userLike } = this.props;
+    const { userDislike } = this.props;
+    const { dispatch } = this.props;
+    const { match } = this.props;
 
-    const handleAccountDeletion = () => {
-      axios.delete('/user').then(() => {
-        try {
-          Cookies.remove('token');
-          delete axios.defaults.headers.get['X-API-KEY'];
-        } catch (exception) {
-          global.console.log(exception);
-        }
-        history.push('/');
+    const likeBtnClasses = [classes.opinionButton];
+    const dislikeBtnClasses = [classes.opinionButton];
+
+    if (userLike === true) {
+      likeBtnClasses.push(classes.buttonGreen);
+    }
+
+    if (userDislike === true) {
+      dislikeBtnClasses.push(classes.buttonRed);
+    }
+
+    const handlePhotoDeletion = () => {
+      axios.delete(`/photo/${photo.id}`).then(() => {
+        history.goBack();
       }).catch((error) => {
         global.console.log(error);
       });
     };
 
-    let userInfos = null;
-    if (isFetching) {
-      userInfos = (
+    const handleChange = action => (event) => {
+      dispatch(action(event.target.value));
+    };
+
+    const handlePostComment = (e) => {
+      e.preventDefault();
+      axios.post(`/photo/${photo.id}/comment`, {
+        text: comment,
+      }).then(() => {
+        dispatch(fetchComments(match.params.id));
+      }).catch((error) => {
+        global.console.log(error);
+      });
+    };
+
+    const handlePostOpinion = opinion => () => {
+      if ((userLike !== true && opinion === 'LIKE') || (userDislike !== true && opinion === 'DISLIKE')) {
+        axios.put(`/photo/${photo.id}/opinion`, {
+          opinion,
+        }).then(() => {
+          if (opinion === 'LIKE') {
+            dispatch(updateUserLike(true));
+            dispatch(updateUserDislike(false));
+          } else {
+            dispatch(updateUserLike(false));
+            dispatch(updateUserDislike(true));
+          }
+        }).catch((error) => {
+          global.console.log(error);
+        });
+      } else {
+        axios.delete(`/photo/${photo.id}/opinion`).then(() => {
+          dispatch(updateUserLike(false));
+          dispatch(updateUserDislike(false));
+        }).catch((error) => {
+          global.console.log(error);
+        });
+      }
+    };
+
+    let commands = null;
+    if (photo.belongToUser) {
+      commands = (
+        <div>
+          <p>
+            This photo belong’s to you, you have access to the following actions :
+          </p>
+          <Button type="submit" variant="contained" color="secondary" onClick={handlePhotoDeletion}>Delete</Button>
+        </div>
+      );
+    }
+
+    let commentsCode = null;
+    if (isFetchingComments) {
+      commentsCode = (
         <p>Loading...</p>
       );
-    } else if (Object.keys(user).length > 0) {
-      userInfos = (
-        <div>
-          <img src={`https://www.gravatar.com/avatar/${md5(user.email)}&s=80`} alt="User gravatar" />
-          <p>
-            Email :
-            {user.email}
-          </p>
+    } else if (comments.length > 0) {
+      commentsCode = (
+        <div className={classes.commentsContainer}>
+          {
+            /*
+             * ESLint rule disabled for this line because
+             * it's explicitely indicated here by the author of the rule
+             * https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-array-index-key.md
+             */
+            comments.map((com, key) => (
+              <span key={key /* eslint-disable-line react/no-array-index-key */}>
+                {com.user.username}
+                :
+                {com.text}
+                <br />
+              </span>
+            ))}
         </div>
       );
     } else {
-      userInfos = (
+      commentsCode = (
+        <p>No comments...</p>
+      );
+    }
+
+    let photoInfos = null;
+    if (isFetching) {
+      photoInfos = (
+        <p>Loading...</p>
+      );
+    } else if (Object.keys(photo).length > 0) {
+      photoInfos = (
+        <div className={classes.photoContainer}>
+          <img src={`${config.api_url}${photo.url}`} alt={photo.title} className={classes.photo} />
+          <div>
+            <Button variant="fab" aria-label="Like" className={likeBtnClasses.join(' ')} onClick={handlePostOpinion('LIKE')}>
+              <i className={[classes.opinionIcons, 'fas', 'fa-thumbs-up'].join(' ')} />
+            </Button>
+            <Button variant="fab" aria-label="Dislike" className={dislikeBtnClasses.join(' ')} onClick={handlePostOpinion('DISLIKE')}>
+              <i className={[classes.opinionIcons, 'fas', 'fa-thumbs-down'].join(' ')} />
+            </Button>
+          </div>
+          <p>
+            {
+              /*
+               * ESLint rule disabled for this line because
+               * it's explicitely indicated here by the author of the rule
+               * https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-array-index-key.md
+               */
+              photo.description.split('\n').map((line, key) => (
+                <span key={key /* eslint-disable-line react/no-array-index-key */}>
+                  {line}
+                  <br />
+                </span>
+              ))}
+          </p>
+          {commands}
+          <Paper className={classes.paper}>
+            <form
+              className={classes.container}
+              onSubmit={handlePostComment}
+            >
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  label="Comment"
+                  type="text"
+                  className={classes.textField}
+                  margin="normal"
+                  value={comment}
+                  onChange={handleChange(updateComment)}
+                />
+              </Grid>
+              <br />
+              <br />
+              <Button type="submit" variant="contained" color="primary">Post</Button>
+            </form>
+            {commentsCode}
+          </Paper>
+        </div>
+      );
+    } else {
+      photoInfos = (
         <p>No info...</p>
       );
     }
 
     return (
       <div>
-        <div className={classes.userContainer}>
+        <div>
           <MenuBar history={history} />
-          <h3>Account management</h3>
-          <p>On this page, you can delete your account and manage your photos</p>
-          {userInfos}
-          <Grid className={classes.loginHorizontalCentering} item xs={12} sm={8} md={8}>
-            <Grid container spacing={24}>
-              <Grid className={classes.leftButton} item md={4} sm={4} xs={12}>
-                <Button className={classes.accountButton} onClick={handleAccountDeletion} variant="contained" color="primary">Delete account</Button>
-              </Grid>
-              <Grid className={classes.rightButton} item md={4} sm={4} xs={12}>
-                <Button className={classes.accountButton} component={Link} to="/upload" variant="contained" color="primary">Upload photo</Button>
-              </Grid>
-            </Grid>
-          </Grid>
+          {photoInfos}
         </div>
-        <UserGaleryContainer classes={classes} history={history} isFetching={isFetchingPhotos} />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  isFetching: state.AccountManagement.isFetching,
-  isFetchingPhotos: state.UserGalery.isFetching,
-  user: state.AccountManagement.user,
-  photos: state.UserGalery.photos,
+  isFetching: state.PhotoDetails.isFetching,
+  isFetchingComments: state.PhotoDetails.isFetchingComments,
+  photo: state.PhotoDetails.photo,
+  comment: state.PhotoDetails.comment,
+  userLike: state.PhotoDetails.userLike,
+  userDislike: state.PhotoDetails.userDislike,
+  comments: state.PhotoDetails.comments,
 });
 
-AccountManagement.defaultProps = {
+PhotoDetails.defaultProps = {
   isFetching: false,
-  isFetchingPhotos: false,
-  user: {},
-  photos: [],
+  isFetchingComments: false,
+  userLike: false,
+  userDislike: false,
+  photo: {},
+  comment: '',
+  comments: [],
 };
 
-AccountManagement.propTypes = {
+PhotoDetails.propTypes = {
   classes: PropTypes.shape().isRequired,
   history: PropTypes.shape().isRequired,
+  match: PropTypes.shape().isRequired,
   isFetching: PropTypes.bool,
-  isFetchingPhotos: PropTypes.bool,
+  isFetchingComments: PropTypes.bool,
+  userLike: PropTypes.bool,
+  userDislike: PropTypes.bool,
   dispatch: PropTypes.func.isRequired,
-  user: PropTypes.shape(),
-  photos: PropTypes.arrayOf(PropTypes.shape()),
+  photo: PropTypes.shape(),
+  comment: PropTypes.string,
+  comments: PropTypes.arrayOf(PropTypes.shape()),
 };
 
 export default compose(
   withStyles(styles, {
-    name: 'AccountManagement',
+    name: 'PhotoDetails',
   }),
   connect(mapStateToProps),
-)(AccountManagement);
+)(PhotoDetails);

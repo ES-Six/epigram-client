@@ -14,13 +14,13 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 
 import {
   updateMobileMenuAnchor,
-  updateDesktopMenuAnchor, toggleDrawer
-} from "../actions/MenuBar";
+  updateDesktopMenuAnchor,
+  toggleDrawer,
+} from '../actions/MenuBar';
 
 
 const DesktopMenu = (props) => {
   const { classes } = props;
-  const { history } = props;
   const { anchorEl } = props;
   const { dispatch } = props;
   const isMenuOpen = Boolean(anchorEl);
@@ -90,7 +90,6 @@ DesktopMenu.defaultProps = {
 
 DesktopMenu.propTypes = {
   classes: PropTypes.shape().isRequired,
-  history: PropTypes.shape().isRequired,
   anchorEl: PropTypes.shape(),
   dispatch: PropTypes.func.isRequired,
 };

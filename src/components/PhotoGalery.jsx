@@ -97,6 +97,10 @@ const styles = theme => ({
     'margin-right': '15px',
     'word-wrap': 'break-word',
   },
+  rmLinkStyle: {
+    'text-decoration': 'none',
+    color: 'black',
+  },
 });
 
 let socket = null;

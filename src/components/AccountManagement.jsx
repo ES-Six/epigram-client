@@ -84,6 +84,10 @@ const styles = theme => ({
   accountButton: {
     width: '150px',
   },
+  rmLinkStyle: {
+    'text-decoration': 'none',
+    color: 'black',
+  },
 });
 
 class AccountManagement extends Component {
@@ -158,7 +162,7 @@ class AccountManagement extends Component {
           <Grid className={classes.loginHorizontalCentering} item xs={12} sm={8} md={8}>
             <Grid container spacing={24}>
               <Grid className={classes.leftButton} item md={4} sm={4} xs={12}>
-                <Button className={classes.accountButton} onClick={handleAccountDeletion} variant="contained" color="primary">Delete account</Button>
+                <Button className={classes.accountButton} onClick={handleAccountDeletion} variant="contained" color="secondary">Delete account</Button>
               </Grid>
               <Grid className={classes.rightButton} item md={4} sm={4} xs={12}>
                 <Button className={classes.accountButton} component={Link} to="/upload" variant="contained" color="primary">Upload photo</Button>

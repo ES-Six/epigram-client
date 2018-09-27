@@ -1,14 +1,17 @@
-const PhotoGalery = (state = {
-  photos: [],
-  messages: [],
+const PhotoDetails = (state = {
+  photo: {},
   isFetching: false,
-  chatMessage: '',
+  comments: [],
+  isFetchingComments: false,
+  comment: '',
+  userLike: false,
+  userDislike: false,
 }, action) => {
   switch (action.type) {
-    case 'UPDATE_PHOTO_TILES': {
+    case 'UPDATE_PHOTO': {
       return {
         ...state,
-        photos: action.photos,
+        photo: action.photo,
         isFetching: false,
       };
     }
@@ -18,20 +21,35 @@ const PhotoGalery = (state = {
         isFetching: action.flag,
       };
     }
-    case 'ADD_MESSAGES': {
-      state.messages.push(action.message);
-      return state;
-    }
-    case 'CLEAR_CHAT': {
+    case 'UPDATE_COMMENTS': {
       return {
         ...state,
-        messages: [],
+        comments: action.comments,
+        isFetchingComments: false,
       };
     }
-    case 'UPDATE_USER_MESSAGE': {
+    case 'IS_FETCHING_COMMENTS': {
       return {
         ...state,
-        chatMessage: action.chatMessage,
+        isFetchingComments: action.flag,
+      };
+    }
+    case 'UPDATE_USER_LIKE': {
+      return {
+        ...state,
+        userLike: action.flag,
+      };
+    }
+    case 'UPDATE_USER_DISLIKE': {
+      return {
+        ...state,
+        userDislike: action.flag,
+      };
+    }
+    case 'UPDATE_COMMENT': {
+      return {
+        ...state,
+        comment: action.comment,
       };
     }
     default:
@@ -39,4 +57,4 @@ const PhotoGalery = (state = {
   }
 };
 
-export default PhotoGalery;
+export default PhotoDetails;

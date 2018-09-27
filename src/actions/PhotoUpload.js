@@ -28,7 +28,13 @@ export const uploadPhoto = (categoryId, formData, uploadSuccessCallback) => (dis
     },
   });
   return request.then(
-    response => uploadSuccessCallback(response),
-    err => global.console.log(err),
+    (response) => {
+      dispatch(isUploading(false));
+      uploadSuccessCallback(response);
+    },
+    (err) => {
+      dispatch(isUploading(false));
+      global.console.log(err);
+    },
   );
 };
