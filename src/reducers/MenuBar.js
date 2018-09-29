@@ -4,6 +4,8 @@ const MenuBar = (state = {
   categories: [],
   openDrawer: false,
   isFetching: false,
+  locale: 'fr-fr',
+  translationsOverride: null,
 }, action) => {
   switch (action.type) {
     case 'UPDATE_MOBILE_MENU_ANCHOR': {
@@ -29,6 +31,13 @@ const MenuBar = (state = {
       return {
         ...state,
         isFetching: action.flag,
+      };
+    }
+    case 'UPDATE_LANGUAGE': {
+      return {
+        ...state,
+        locale: action.locale,
+        translationsOverride: action.translationsOverride,
       };
     }
     case 'TOGGLE_DRAWER': {

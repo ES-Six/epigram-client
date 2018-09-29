@@ -1,6 +1,8 @@
 import { withStyles } from '@material-ui/core/styles';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { translate } from 'react-translate';
+import compose from 'recompose/compose';
 import MenuBar from './MenuBar';
 import HomeContainer from '../containers/HomeContainer';
 
@@ -23,18 +25,18 @@ const styles = () => ({
 const Home = (props) => {
   const { classes } = props;
   const { history } = props;
+  const { t } = props;
 
   return (
     <div>
       <MenuBar history={history} />
       <div className={classes.container}>
-        <h2>Welcome to EPIgram</h2>
+        <h2>{t('WELCOME_TO_EPIGRAM')}</h2>
         <p>
-          EPIgram is a new platform using reactJS that allow you
-          to share any photos group by your favorites categories.
+          {t('EPIGRAM_DESCRIPTION')}
           <br />
           <br />
-          Here is few thing you can do to begin
+          {t('WHAT_YOU_CAN_DO')}
         </p>
         <br />
         <HomeContainer classes={classes} history={history} />
@@ -46,6 +48,12 @@ const Home = (props) => {
 Home.propTypes = {
   classes: PropTypes.shape().isRequired,
   history: PropTypes.shape().isRequired,
+  t: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(Home);
+export default compose(
+  withStyles(styles, {
+    name: 'Home',
+  }),
+  translate('Home'),
+)(Home);

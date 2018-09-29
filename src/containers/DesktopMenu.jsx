@@ -6,23 +6,25 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import Input from '@material-ui/core/Input';
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
+import MenuItem from '@material-ui/core/MenuItem';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import Select from '@material-ui/core/Select';
 
 import {
   updateMobileMenuAnchor,
   updateDesktopMenuAnchor,
   toggleDrawer,
+  fetchLanguage,
 } from '../actions/MenuBar';
-
 
 const DesktopMenu = (props) => {
   const { classes } = props;
   const { anchorEl } = props;
   const { dispatch } = props;
+  const { locale } = props;
+  console.log(locale);
   const isMenuOpen = Boolean(anchorEl);
 
   const handleProfileMenuOpen = (event) => {
@@ -37,6 +39,10 @@ const DesktopMenu = (props) => {
     props.dispatch(toggleDrawer(open));
   };
 
+  const handleLanguageChange = (event) => {
+    dispatch(fetchLanguage(event.target.value));
+  };
+
   return (
     <AppBar position="static">
       <Toolbar>
@@ -47,17 +53,14 @@ const DesktopMenu = (props) => {
           <Link to="/home" className={classes.typography}>EPIgram</Link>
         </Typography>
         <div className={classes.search}>
-          <div className={classes.searchIcon}>
-            <SearchIcon />
-          </div>
-          <Input
-            placeholder="Search…"
-            disableUnderline
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput,
-            }}
-          />
+          <Select
+            value={locale}
+            onChange={handleLanguageChange}
+            placeholder="Change language"
+          >
+            <MenuItem value="fr-fr">Français</MenuItem>
+            <MenuItem value="en-en">English</MenuItem>
+          </Select>
         </div>
         <div className={classes.grow} />
         <div className={classes.sectionDesktop}>
@@ -82,16 +85,19 @@ const DesktopMenu = (props) => {
 
 const mapStateToProps = state => ({
   anchorEl: state.MenuBar.anchorEl,
+  locale: state.MenuBar.locale,
 });
 
 DesktopMenu.defaultProps = {
   anchorEl: null,
+  locale: 'fr-fr',
 };
 
 DesktopMenu.propTypes = {
   classes: PropTypes.shape().isRequired,
   anchorEl: PropTypes.shape(),
   dispatch: PropTypes.func.isRequired,
+  locale: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps)(DesktopMenu);
