@@ -5,4 +5,9 @@ export default {
     EPIGRAM_DESCRIPTION: 'EPIGram est une nouvelle plateforme qui fonctionne avec ReactJS et qui vous permet de partager n’importe quels photos regroupés dans vos catégories préférés.',
     WHAT_YOU_CAN_DO: 'Voici quelques choses que vous pouvez faire pour commencer',
   },
+  HomeContainer: {
+    BROWSE_PHOTOS: 'Parcourir les photos',
+    MANAGE_ACCOUNT: 'Gérer votre compte',
+    UPLOAD_PHOTOS: 'Uploader des photos',
+  },
 };

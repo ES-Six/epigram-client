@@ -5,4 +5,9 @@ export default {
     EPIGRAM_DESCRIPTION: 'EPIgram is a new platform using reactJS that allow you to share any photos group by your favorites categories.',
     WHAT_YOU_CAN_DO: 'Here is few thing you can do to begin',
   },
+  HomeContainer: {
+    BROWSE_PHOTOS: 'Browse photos',
+    MANAGE_ACCOUNT: 'Manage your account',
+    UPLOAD_PHOTOS: 'Upload photos',
+  },
 };
