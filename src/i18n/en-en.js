@@ -10,4 +10,8 @@ export default {
     MANAGE_ACCOUNT: 'Manage your account',
     UPLOAD_PHOTOS: 'Upload photos',
   },
+  ProfileMenu: {
+    ACCOUNT_MANAGEMENT: 'Account management',
+    LOGOUT: 'Logout',
+  },
 };

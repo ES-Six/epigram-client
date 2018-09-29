@@ -24,7 +24,6 @@ const DesktopMenu = (props) => {
   const { anchorEl } = props;
   const { dispatch } = props;
   const { locale } = props;
-  console.log(locale);
   const isMenuOpen = Boolean(anchorEl);
 
   const handleProfileMenuOpen = (event) => {
@@ -54,9 +53,9 @@ const DesktopMenu = (props) => {
         </Typography>
         <div className={classes.search}>
           <Select
+            className={classes.languageSelector}
             value={locale}
             onChange={handleLanguageChange}
-            placeholder="Change language"
           >
             <MenuItem value="fr-fr">Français</MenuItem>
             <MenuItem value="en-en">English</MenuItem>
@@ -97,7 +96,7 @@ DesktopMenu.propTypes = {
   classes: PropTypes.shape().isRequired,
   anchorEl: PropTypes.shape(),
   dispatch: PropTypes.func.isRequired,
-  locale: PropTypes.string.isRequired,
+  locale: PropTypes.string,
 };
 
 export default connect(mapStateToProps)(DesktopMenu);

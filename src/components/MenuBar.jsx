@@ -91,6 +91,11 @@ const styles = theme => ({
     color: 'white',
     'text-decoration': 'none',
   },
+  languageSelector: {
+    width: '200px',
+    color: 'white',
+    'padding-left': '15px',
+  },
 });
 
 class MenuBar extends Component {
@@ -129,6 +134,7 @@ class MenuBar extends Component {
 const mapStateToProps = state => ({
   isFetching: state.MenuBar.isFetching,
   categories: state.MenuBar.categories,
+  translationsOverride: state.MenuBar.translationsOverride,
 });
 
 MenuBar.defaultProps = {

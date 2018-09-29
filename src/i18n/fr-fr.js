@@ -10,4 +10,12 @@ export default {
     MANAGE_ACCOUNT: 'Gérer votre compte',
     UPLOAD_PHOTOS: 'Uploader des photos',
   },
+  ProfileMenu: {
+    ACCOUNT_MANAGEMENT: 'Gestion du compte',
+    LOGOUT: 'Déconnection',
+  },
+  DesktopMenu: {
+    ACCOUNT_MANAGEMENT: 'Gestion du compte',
+    LOGOUT: 'Déconnection',
+  },
 };
