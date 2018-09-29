@@ -31,7 +31,7 @@ const ProfileMenu = (props) => {
   };
 
   const logout = () => {
-    console.log('LOGEDOUT');
+    global.console.log('LOGOUT');
     Cookies.remove('token');
     history.push('/');
   };

@@ -94,7 +94,6 @@ UserGaleryContainer.defaultProps = {
 
 UserGaleryContainer.propTypes = {
   classes: PropTypes.shape().isRequired,
-  history: PropTypes.shape().isRequired,
   isFetching: PropTypes.bool.isRequired,
   photos: PropTypes.arrayOf(PropTypes.shape()),
 };
