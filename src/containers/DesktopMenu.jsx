@@ -18,12 +18,15 @@ import {
   toggleDrawer,
   fetchLanguage,
 } from '../actions/MenuBar';
+import compose from "recompose/compose";
+import { translate } from "react-translate";
 
 const DesktopMenu = (props) => {
   const { classes } = props;
   const { anchorEl } = props;
   const { dispatch } = props;
   const { locale } = props;
+  const { t } = props;
   const isMenuOpen = Boolean(anchorEl);
 
   const handleProfileMenuOpen = (event) => {
@@ -57,8 +60,8 @@ const DesktopMenu = (props) => {
             value={locale}
             onChange={handleLanguageChange}
           >
-            <MenuItem value="fr-fr">Français</MenuItem>
-            <MenuItem value="en-en">English</MenuItem>
+            <MenuItem value="fr-fr">{t('LANGUAGE_FR')}</MenuItem>
+            <MenuItem value="en-en">{t('LANGUAGE_EN')}</MenuItem>
           </Select>
         </div>
         <div className={classes.grow} />
@@ -85,6 +88,7 @@ const DesktopMenu = (props) => {
 const mapStateToProps = state => ({
   anchorEl: state.MenuBar.anchorEl,
   locale: state.MenuBar.locale,
+  translationsOverride: state.MenuBar.translationsOverride,
 });
 
 DesktopMenu.defaultProps = {
@@ -97,6 +101,10 @@ DesktopMenu.propTypes = {
   anchorEl: PropTypes.shape(),
   dispatch: PropTypes.func.isRequired,
   locale: PropTypes.string,
+  t: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(DesktopMenu);
+export default compose(
+  connect(mapStateToProps),
+  translate('DesktopMenu'),
+)(DesktopMenu);

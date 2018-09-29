@@ -14,4 +14,18 @@ export default {
     ACCOUNT_MANAGEMENT: 'Account management',
     LOGOUT: 'Logout',
   },
+  DesktopMenu: {
+    LANGUAGE_FR: 'French',
+    LANGUAGE_EN: 'English',
+  },
+  MenuDrawer: {
+    CATEGORY_SPORT: 'Sport',
+    CATEGORY_ANIMALS: 'Animals',
+    CATEGORY_NATURE: 'Nature',
+    CATEGORY_CARS: 'Cars',
+    CATEGORY_POLITIC: 'Politic',
+    CATEGORY_COMPUTER_SCIENCE: 'Computer science',
+    CATEGORY_HUMOUR: 'Humor',
+    CATEGORY_SELFIES: 'Selfies',
+  },
 };

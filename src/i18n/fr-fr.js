@@ -15,7 +15,17 @@ export default {
     LOGOUT: 'Déconnection',
   },
   DesktopMenu: {
-    ACCOUNT_MANAGEMENT: 'Gestion du compte',
-    LOGOUT: 'Déconnection',
+    LANGUAGE_FR: 'Français',
+    LANGUAGE_EN: 'Anglais',
+  },
+  MenuDrawer: {
+    CATEGORY_SPORT: 'Sport',
+    CATEGORY_ANIMALS: 'Animaux',
+    CATEGORY_NATURE: 'Nature',
+    CATEGORY_CARS: 'Automobile',
+    CATEGORY_POLITIC: 'Politique',
+    CATEGORY_COMPUTER_SCIENCE: 'Informatique',
+    CATEGORY_HUMOUR: 'Humour',
+    CATEGORY_SELFIES: 'Selfies',
   },
 };
