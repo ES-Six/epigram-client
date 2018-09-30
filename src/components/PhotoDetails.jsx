@@ -8,8 +8,10 @@ import Grid from '@material-ui/core/Grid/Grid';
 import TextField from '@material-ui/core/TextField/TextField';
 import Paper from '@material-ui/core/Paper/Paper';
 import axios from 'axios';
+import { translate } from 'react-translate';
 import MenuBar from './MenuBar';
 import config from '../config/config';
+
 import {
   fetchPhoto,
   fetchComments,
@@ -94,6 +96,7 @@ class PhotoDetails extends Component {
     const { userDislike } = this.props;
     const { dispatch } = this.props;
     const { match } = this.props;
+    const { t } = this.props;
 
     const likeBtnClasses = [classes.opinionButton];
     const dislikeBtnClasses = [classes.opinionButton];
@@ -158,10 +161,8 @@ class PhotoDetails extends Component {
     if (photo.belongToUser) {
       commands = (
         <div>
-          <p>
-            This photo belong’s to you, you have access to the following actions :
-          </p>
-          <Button type="submit" variant="contained" color="secondary" onClick={handlePhotoDeletion}>Delete</Button>
+          <p>{t('PHOTO_BELONG_TO_USER')}</p>
+          <Button type="submit" variant="contained" color="secondary" onClick={handlePhotoDeletion}>{t('DELETE_BTN')}</Button>
         </div>
       );
     }
@@ -169,7 +170,7 @@ class PhotoDetails extends Component {
     let commentsCode = null;
     if (isFetchingComments) {
       commentsCode = (
-        <p>Loading...</p>
+        <p>{t('LOADING')}</p>
       );
     } else if (comments.length > 0) {
       commentsCode = (
@@ -192,14 +193,14 @@ class PhotoDetails extends Component {
       );
     } else {
       commentsCode = (
-        <p>No comments...</p>
+        <p>{t('NO_COMMENTS')}</p>
       );
     }
 
     let photoInfos = null;
     if (isFetching) {
       photoInfos = (
-        <p>Loading...</p>
+        <p>{t('LOADING')}</p>
       );
     } else if (Object.keys(photo).length > 0) {
       photoInfos = (
@@ -236,7 +237,7 @@ class PhotoDetails extends Component {
               <Grid item xs={12}>
                 <TextField
                   required
-                  label="Comment"
+                  label={t('COMMENT')}
                   type="text"
                   className={classes.textField}
                   margin="normal"
@@ -246,7 +247,7 @@ class PhotoDetails extends Component {
               </Grid>
               <br />
               <br />
-              <Button type="submit" variant="contained" color="primary">Post</Button>
+              <Button type="submit" variant="contained" color="primary">{t('POST_BTN')}</Button>
             </form>
             {commentsCode}
           </Paper>
@@ -254,7 +255,7 @@ class PhotoDetails extends Component {
       );
     } else {
       photoInfos = (
-        <p>No info...</p>
+        <p>{t('NO_INFO')}</p>
       );
     }
 
@@ -301,6 +302,7 @@ PhotoDetails.propTypes = {
   photo: PropTypes.shape(),
   comment: PropTypes.string,
   comments: PropTypes.arrayOf(PropTypes.shape()),
+  t: PropTypes.func.isRequired,
 };
 
 export default compose(
@@ -308,4 +310,5 @@ export default compose(
     name: 'PhotoDetails',
   }),
   connect(mapStateToProps),
+  translate('PhotoDetails'),
 )(PhotoDetails);

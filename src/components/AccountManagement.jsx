@@ -12,6 +12,7 @@ import UserGaleryContainer from '../containers/UserGaleryContainer';
 import { fetchUser, updateUser } from '../actions/AccountManagement';
 import { fetchUserPhotos, updatePhotoTiles } from '../actions/UserGalery';
 import MenuBar from './MenuBar';
+import { translate } from "react-translate";
 
 const md5 = require('md5');
 
@@ -116,6 +117,7 @@ class AccountManagement extends Component {
     const { isFetching } = this.props;
     const { isFetchingPhotos } = this.props;
     const { user } = this.props;
+    const { t } = this.props;
 
     const handleAccountDeletion = () => {
       axios.delete('/user').then(() => {
@@ -134,21 +136,21 @@ class AccountManagement extends Component {
     let userInfos = null;
     if (isFetching) {
       userInfos = (
-        <p>Loading...</p>
+        <p>{t('LOADING')}</p>
       );
     } else if (Object.keys(user).length > 0) {
       userInfos = (
         <div>
-          <img src={`https://www.gravatar.com/avatar/${md5(user.email)}&s=80`} alt="User gravatar" />
+          <img src={`https://www.gravatar.com/avatar/${md5(user.email)}&s=80`} alt="Gravatar" />
           <p>
-            Email :
+            {t('EMAIl')}
             {user.email}
           </p>
         </div>
       );
     } else {
       userInfos = (
-        <p>No info...</p>
+        <p>{t('NO_INFO')}</p>
       );
     }
 
@@ -156,16 +158,16 @@ class AccountManagement extends Component {
       <div>
         <MenuBar history={history} />
         <div className={classes.userContainer}>
-          <h3>Account management</h3>
-          <p>On this page, you can delete your account and manage your photos</p>
+          <h3>{t('TITLE')}</h3>
+          <p>{t('DESCRIPTION')}</p>
           {userInfos}
           <Grid className={classes.loginHorizontalCentering} item xs={12} sm={8} md={8}>
             <Grid container spacing={24}>
               <Grid className={classes.leftButton} item md={4} sm={4} xs={12}>
-                <Button className={classes.accountButton} onClick={handleAccountDeletion} variant="contained" color="secondary">Delete account</Button>
+                <Button className={classes.accountButton} onClick={handleAccountDeletion} variant="contained" color="secondary">{t('DELETE_ACCOUNT_BTN')}</Button>
               </Grid>
               <Grid className={classes.rightButton} item md={4} sm={4} xs={12}>
-                <Button className={classes.accountButton} component={Link} to="/upload" variant="contained" color="primary">Upload photo</Button>
+                <Button className={classes.accountButton} component={Link} to="/upload" variant="contained" color="primary">{t('UPLOAD_PHOTO_BTN')}</Button>
               </Grid>
             </Grid>
           </Grid>
@@ -198,6 +200,7 @@ AccountManagement.propTypes = {
   dispatch: PropTypes.func.isRequired,
   user: PropTypes.shape(),
   photos: PropTypes.arrayOf(PropTypes.shape()),
+  t: PropTypes.func.isRequired,
 };
 
 export default compose(
@@ -205,4 +208,5 @@ export default compose(
     name: 'AccountManagement',
   }),
   connect(mapStateToProps),
+  translate('AccountManagement'),
 )(AccountManagement);

@@ -8,7 +8,7 @@ export default {
   HomeContainer: {
     BROWSE_PHOTOS: 'Parcourir les photos',
     MANAGE_ACCOUNT: 'Gérer votre compte',
-    UPLOAD_PHOTOS: 'Uploader des photos',
+    UPLOAD_PHOTOS: 'Téléverser une photo',
   },
   ProfileMenu: {
     ACCOUNT_MANAGEMENT: 'Gestion du compte',
@@ -67,5 +67,34 @@ export default {
     CATEGORY_COMPUTER_SCIENCE: 'Informatique',
     CATEGORY_HUMOUR: 'Humour',
     CATEGORY_SELFIES: 'Selfies',
+  },
+  AccountManagement: {
+    LOADING: 'Chargement...',
+    NO_INFO: 'Aucune information...',
+    EMAIl: 'Couriel : ',
+    AVATAR_ALT: 'Gravatar utilisateur',
+    TITLE: 'Gestion du compte',
+    DESCRIPTION: 'Sur cette page, vous pouvez effacer votre compte et gérer vos photos',
+    DELETE_ACCOUNT_BTN: 'Supprimer le compte',
+    UPLOAD_PHOTO_BTN: 'Téléverser une photo',
+    NO_PHOTO_FOUND: 'Vous n’avez téléverser aucune photo pour le moment...',
+  },
+  PhotoDetails: {
+    PHOTO_BELONG_TO_USER: 'Cette photo vous appartient, vous avez accès à la fonction suivante :',
+    DELETE_BTN: 'Supprimer',
+    LOADING: 'Chargement...',
+    NO_COMMENTS: 'Aucun commentaire à afficher...',
+    POST_BTN: 'Envoyer',
+    NO_INFO: 'Aucune information...',
+    COMMENT: 'Commentaire',
+  },
+  PhotoGalery: {
+    CHAT: 'Chat',
+    YOU: 'Vous',
+    MESSAGE: 'Message',
+    MESSAGE_PLACEHOLDER: 'Saisissez un message...',
+    SEND_MESSAGE_BTN: 'Envoyer',
+    LOADING: 'Chargement...',
+    NO_PHOTO: 'Cette catégorie n’a pas de photos pour le moment...',
   },
 };

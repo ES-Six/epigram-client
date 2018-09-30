@@ -18,6 +18,7 @@ import {
   clearChatMessage,
 } from '../actions/PhotoGalery';
 import MenuBar from './MenuBar';
+import { translate } from "react-translate";
 
 const styles = theme => ({
   root: {
@@ -186,14 +187,14 @@ class PhotoGalery extends Component {
     const { chatMessage } = this.props;
     const { messages } = this.props;
     const { dispatch } = this.props;
-
+    const { t } = this.props;
 
     const handlePostChatMessage = (e) => {
       e.preventDefault();
       socket.emit('sendMessage', chatMessage);
       dispatch(addMessage({
         message: chatMessage,
-        username: 'You',
+        username: t('YOU'),
       }));
       dispatch(updateChatMessage(''));
     };
@@ -209,7 +210,7 @@ class PhotoGalery extends Component {
           <Grid id="chat-container" className={classes.chatContainer} item xs={12}>
             <Paper id="chat-paper" className={classes.chatPaper}>
               <Grid item xs={12}>
-                <h3 className={classes.chatTitle}>Chat</h3>
+                <h3 className={classes.chatTitle}>{t('CHAT')}</h3>
                 <form onSubmit={handlePostChatMessage}>
                   <div id="chat-messages" className={classes.chatMessagesContainer}>
                     <ul className={classes.chatMessageList}>
@@ -234,15 +235,15 @@ class PhotoGalery extends Component {
                   <div className={classes.chatInputContainer}>
                     <TextField
                       required
-                      label="Message"
+                      label={t('MESSAGE')}
                       type="text"
-                      placeholder="Type a message"
+                      placeholder={t('MESSAGE_PLACEHOLDER')}
                       className={[classes.chatInput, 'chat-input'].join(' ')}
                       margin="normal"
                       value={chatMessage}
                       onChange={handleChange(updateChatMessage)}
                     />
-                    <Button type="submit" variant="contained" color="primary">Send</Button>
+                    <Button type="submit" variant="contained" color="primary">{t('SEND_MESSAGE_BTN')}</Button>
                   </div>
                 </form>
               </Grid>
@@ -279,6 +280,7 @@ PhotoGalery.propTypes = {
   isFetching: PropTypes.bool,
   chatMessage: PropTypes.string,
   messages: PropTypes.arrayOf(PropTypes.shape()),
+  t: PropTypes.func.isRequired,
 };
 
 export default compose(
@@ -286,4 +288,5 @@ export default compose(
     name: 'PhotoGalery',
   }),
   connect(mapStateToProps),
+  translate('PhotoGalery'),
 )(PhotoGalery);

@@ -4,12 +4,15 @@ import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import { Link } from 'react-router-dom';
+import compose from 'recompose/compose';
+import { translate } from 'react-translate';
 import config from '../config/config';
 
 const UserGaleryContainer = (props) => {
   const { classes } = props;
   const { isFetching } = props;
   const { photos } = props;
+  const { t } = props;
   let tiles = null;
 
   if (isFetching) {
@@ -21,7 +24,7 @@ const UserGaleryContainer = (props) => {
           justify="center"
           alignItems="center"
         >
-          <h3>Loading...</h3>
+          <h3>{t('LOADING')}</h3>
         </Grid>
       </Grid>);
   } else if (!isFetching && photos.length === 0) {
@@ -33,7 +36,7 @@ const UserGaleryContainer = (props) => {
           justify="center"
           alignItems="center"
         >
-          <h3>This category has no photo yet</h3>
+          <h3>{t('NO_PHOTO_FOUND')}</h3>
         </Grid>
       </Grid>);
   } else {
@@ -101,6 +104,10 @@ UserGaleryContainer.propTypes = {
 const mapStateToProps = state => ({
   photos: state.UserGalery.photos,
   isFetching: state.UserGalery.isFetching,
+  translationsOverride: state.MenuBar.translationsOverride,
 });
 
-export default connect(mapStateToProps)(UserGaleryContainer);
+export default compose(
+  connect(mapStateToProps),
+  translate('AccountManagement'),
+)(UserGaleryContainer);
