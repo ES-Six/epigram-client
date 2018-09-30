@@ -7,6 +7,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import compose from 'recompose/compose';
+import { translate } from 'react-translate';
+
 import {
   updateEmail,
   updatePassword,
@@ -19,6 +22,7 @@ const LoginContainer = (props) => {
   const { loginError } = props;
   const { email } = props;
   const { password } = props;
+  const { t } = props;
 
   const handleChange = action => (event) => {
     props.dispatch(action(event.target.value));
@@ -26,7 +30,7 @@ const LoginContainer = (props) => {
 
   let errorField = null;
   if (loginError) {
-    errorField = <h4 className={classes.error}>Invalid credentials</h4>;
+    errorField = <h4 className={classes.error}>{t('INVALID_CREDENTIALS')}</h4>;
   }
 
   const handleFormSubmit = (e) => {
@@ -53,9 +57,9 @@ const LoginContainer = (props) => {
         <Grid item xs={12}>
           <TextField
             required
-            label="Email"
+            label={t('EMAIL')}
             type="email"
-            placeholder="your@email.com"
+            placeholder={t('EMAIL_PLACEHOLDER')}
             className={classes.textField}
             margin="normal"
             value={email}
@@ -65,7 +69,7 @@ const LoginContainer = (props) => {
         <Grid item xs={12}>
           <TextField
             required
-            label="Password"
+            label={t('PASSWORD')}
             className={classes.textField}
             type="password"
             autoComplete="current-password"
@@ -75,10 +79,10 @@ const LoginContainer = (props) => {
           />
         </Grid>
         <br />
-        <Link to="/register">You don’t have an account, create one here.</Link>
+        <Link to="/register">{t('REGISTRATION_LINK')}</Link>
         <br />
         <br />
-        <Button type="submit" variant="contained" color="primary">Login</Button>
+        <Button type="submit" variant="contained" color="primary">{t('LOGIN_BTN')}</Button>
       </form>
     </div>
   );
@@ -88,6 +92,7 @@ const mapStateToProps = state => ({
   loginError: state.Login.loginError,
   email: state.Login.email,
   password: state.Login.password,
+  translationsOverride: state.MenuBar.translationsOverride,
 });
 
 LoginContainer.defaultProps = {
@@ -103,6 +108,10 @@ LoginContainer.propTypes = {
   loginError: PropTypes.bool,
   email: PropTypes.string,
   password: PropTypes.string,
+  t: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(LoginContainer);
+export default compose(
+  connect(mapStateToProps),
+  translate('Login'),
+)(LoginContainer);

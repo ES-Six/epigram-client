@@ -28,4 +28,13 @@ export default {
     CATEGORY_HUMOUR: 'Humor',
     CATEGORY_SELFIES: 'Selfies',
   },
+  Login: {
+    LOGIN: 'Login',
+    LOGIN_BTN: 'Login',
+    EMAIL: 'Email',
+    PASSWORD: 'Password',
+    EMAIL_PLACEHOLDER: 'your@email.com',
+    REGISTRATION_LINK: 'You don’t have an account ? Create one here.',
+    INVALID_CREDENTIALS: 'Invalid credentials',
+  },
 };

@@ -3,7 +3,10 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import PropTypes from 'prop-types';
+import compose from 'recompose/compose';
+import { translate } from 'react-translate';
 import LoginContainer from '../containers/LoginContainer';
+
 
 const styles = theme => ({
   root: {
@@ -33,6 +36,7 @@ const styles = theme => ({
 const Login = (props) => {
   const { classes } = props;
   const { history } = props;
+  const { t } = props;
 
   global.console.log('RENDER PARENT');
 
@@ -42,7 +46,7 @@ const Login = (props) => {
         <Grid className={classes.loginHorizontalCentering} item xs={12} sm={6} md={5}>
           <Paper className={classes.paper}>
             <Grid item xs={12}>
-              <h3>Login</h3>
+              <h3>{t('LOGIN')}</h3>
             </Grid>
             <LoginContainer classes={classes} history={history} />
           </Paper>
@@ -55,6 +59,12 @@ const Login = (props) => {
 Login.propTypes = {
   classes: PropTypes.shape().isRequired,
   history: PropTypes.shape().isRequired,
+  t: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(Login);
+export default compose(
+  withStyles(styles, {
+    name: 'Login',
+  }),
+  translate('Login'),
+)(Login);

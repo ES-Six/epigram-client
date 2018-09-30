@@ -28,4 +28,13 @@ export default {
     CATEGORY_HUMOUR: 'Humour',
     CATEGORY_SELFIES: 'Selfies',
   },
+  Login: {
+    LOGIN: 'Connexion',
+    LOGIN_BTN: 'Se connecter',
+    EMAIL: 'Courriel',
+    PASSWORD: 'Mot de passe',
+    EMAIL_PLACEHOLDER: 'votre@courriel.com',
+    REGISTRATION_LINK: 'Vous n’avez pas de compte ? Creez-en un ici.',
+    INVALID_CREDENTIALS: 'Identifiants invalides',
+  },
 };
