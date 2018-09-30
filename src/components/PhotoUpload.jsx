@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import compose from 'recompose/compose';
 import connect from 'react-redux/es/connect/connect';
+import { translate } from 'react-translate';
 import Button from '@material-ui/core/Button/Button';
 import Grid from '@material-ui/core/Grid/Grid';
 import TextField from '@material-ui/core/TextField/TextField';
@@ -56,6 +57,7 @@ class PhotoUpload extends Component {
     const { description } = this.props;
     const { categories } = this.props;
     const { dispatch } = this.props;
+    const { t } = this.props;
 
     const handleChange = action => (event) => {
       dispatch(action(event.target.value));
@@ -76,14 +78,14 @@ class PhotoUpload extends Component {
         }));
       } else {
         if (titleInput.validity.valueMissing) {
-          titleInput.setCustomValidity('Vous devez ajouter un titre à la photo');
+          titleInput.setCustomValidity(t('MISSING_TITLE'));
           titleInput.reportValidity();
           titleInput.setCustomValidity('');
           return;
         }
 
         if (descriptionInput.validity.valueMissing) {
-          descriptionInput.setCustomValidity('Vous devez ajouter une description à la photo');
+          descriptionInput.setCustomValidity(t('MISSING_DESCRIPTION'));
           descriptionInput.reportValidity();
           descriptionInput.setCustomValidity('');
         }
@@ -94,7 +96,7 @@ class PhotoUpload extends Component {
       <div>
         <MenuBar history={history} />
         <div className={classes.userContainer}>
-          <h3>UploadPhoto</h3>
+          <h3>{t('UPLOAD_FORM_TITLE')}</h3>
           <form
             id="upload-form"
             className={classes.container}
@@ -103,7 +105,7 @@ class PhotoUpload extends Component {
               <TextField
                 id="filled-select-categories"
                 select
-                label="Select"
+                label={t('CATEGORY_SELECT')}
                 className={classes.textField}
                 value={selectedCategory}
                 onChange={handleChange(updateSelectedCategory)}
@@ -112,13 +114,13 @@ class PhotoUpload extends Component {
                     className: classes.menu,
                   },
                 }}
-                helperText="Please categorise your photo"
+                helperText={t('CATEGORY_SELECT_HELPER_TEXT')}
                 margin="normal"
                 variant="filled"
               >
                 {categories.map(category => (
                   <MenuItem key={category.id} value={category.id}>
-                    {category.name}
+                    {t(category.name)}
                   </MenuItem>
                 ))}
               </TextField>
@@ -127,7 +129,7 @@ class PhotoUpload extends Component {
               <TextField
                 id="upload-form-title"
                 required
-                label="Title"
+                label={t('TITLE')}
                 type="text"
                 className={classes.textField}
                 margin="normal"
@@ -140,7 +142,7 @@ class PhotoUpload extends Component {
               <TextField
                 required
                 id="upload-form-description"
-                label="Description"
+                label={t('DESCRIPTION')}
                 className={classes.textField}
                 type="text"
                 multiline
@@ -164,7 +166,7 @@ class PhotoUpload extends Component {
                   onChange={handleFile}
                 />
                 <Button variant="contained" color="primary" component="span" className={classes.button} disabled={isUploading}>
-                  Choose photo to upload
+                  {t('UPLOAD_BTN')}
                 </Button>
               </label>
             </Grid>
@@ -200,6 +202,7 @@ PhotoUpload.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   selectedCategory: PropTypes.number,
+  t: PropTypes.func.isRequired,
 };
 
 export default compose(
@@ -207,4 +210,5 @@ export default compose(
     name: 'PhotoUpload',
   }),
   connect(mapStateToProps),
+  translate('UploadForm'),
 )(PhotoUpload);
