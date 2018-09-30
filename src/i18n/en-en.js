@@ -37,4 +37,17 @@ export default {
     REGISTRATION_LINK: 'You don’t have an account ? Create one here.',
     INVALID_CREDENTIALS: 'Invalid credentials',
   },
+  Registration: {
+    REGISTER: 'Registration',
+    REGISTER_BTN: 'Create account',
+    PASSWORD_DONT_MATCH: 'Error : Password doesn’t match',
+    PASSWORD_TOO_SHORT: 'Error : Provided password is too short (min 6 caracters)',
+    EMAIL_ALREADY_USED: 'Error : Provided email is already in used by another account',
+    LOGIN_LINK: 'You already have an account ? Click here to login.',
+    EMAIL_PLACEHOLDER: 'your@email.com',
+    USERNAME: 'Username',
+    EMAIL: 'Email',
+    PASSWORD: 'Password',
+    PASSWORD_CONFIRMATION: 'Password confirmation',
+  },
 };

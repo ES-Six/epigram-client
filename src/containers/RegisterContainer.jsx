@@ -15,6 +15,8 @@ import {
   setPasswordTooShortErorr,
   updateUsername,
 } from '../actions/Register';
+import compose from "recompose/compose";
+import { translate } from "react-translate";
 
 const RegisterContainer = (props) => {
   const { classes } = props;
@@ -26,6 +28,7 @@ const RegisterContainer = (props) => {
   const { passwordDoesntMatchError } = props;
   const { passwordTooShortError } = props;
   const { emailAlreadyUsedError } = props;
+  const { t } = props;
 
   const handleChange = action => (event) => {
     props.dispatch(action(event.target.value));
@@ -33,30 +36,28 @@ const RegisterContainer = (props) => {
 
   let errorField = null;
   if (passwordDoesntMatchError) {
-    errorField = <h4 className={classes.error}>Error : Password doesn’t match</h4>;
+    errorField = <h4 className={classes.error}>{t('PASSWORD_DONT_MATCH')}</h4>;
   }
   if (passwordTooShortError) {
     errorField = (
-      <h4 className={classes.error}>
-        Error : Provided password is too short (min 6 caracters)
-      </h4>
+      <h4 className={classes.error}>{t('PASSWORD_TOO_SHORT')}</h4>
     );
   }
   if (emailAlreadyUsedError) {
     errorField = (
-      <h4 className={classes.error}>
-        Error : Provided email is already in used by another account
-      </h4>
+      <h4 className={classes.error}>{t('EMAIL_ALREADY_USED')}</h4>
     );
   }
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    if (password < 6) {
+    if (password.length < 6) {
       props.dispatch(setPasswordTooShortErorr());
+      return;
     }
     if (password !== passwordConfirmation) {
       props.dispatch(setPasswordDoesntMatchErorr());
+      return;
     }
 
     axios.post('/user/register', {
@@ -84,7 +85,7 @@ const RegisterContainer = (props) => {
         <Grid item xs={12}>
           <TextField
             required
-            label="Username"
+            label={t('USERNAME')}
             type="text"
             className={classes.textField}
             margin="normal"
@@ -95,9 +96,9 @@ const RegisterContainer = (props) => {
         <Grid item xs={12}>
           <TextField
             required
-            label="Email"
+            label={t('EMAIL')}
             type="email"
-            placeholder="your@email.com"
+            placeholder={t('EMAIL_PLACEHOLDER')}
             className={classes.textField}
             margin="normal"
             value={email}
@@ -107,7 +108,7 @@ const RegisterContainer = (props) => {
         <Grid item xs={12}>
           <TextField
             required
-            label="Password"
+            label={t('PASSWORD')}
             className={classes.textField}
             type="password"
             autoComplete="current-password"
@@ -119,7 +120,7 @@ const RegisterContainer = (props) => {
         <Grid item xs={12}>
           <TextField
             required
-            label="Confirm password"
+            label={t('PASSWORD_CONFIRMATION')}
             className={classes.textField}
             type="password"
             margin="normal"
@@ -128,10 +129,10 @@ const RegisterContainer = (props) => {
           />
         </Grid>
         <br />
-        <Link to="/">You already have an account, click here to login</Link>
+        <Link to="/">{t('LOGIN_LINK')}</Link>
         <br />
         <br />
-        <Button type="submit" variant="contained" color="primary">Create account</Button>
+        <Button type="submit" variant="contained" color="primary">{t('REGISTER_BTN')}</Button>
       </form>
     </div>
   );
@@ -145,6 +146,7 @@ const mapStateToProps = state => ({
   email: state.Register.email,
   password: state.Register.password,
   passwordConfirmation: state.Register.passwordConfirmation,
+  translationsOverride: state.MenuBar.translationsOverride,
 });
 
 RegisterContainer.defaultProps = {
@@ -170,6 +172,10 @@ RegisterContainer.propTypes = {
   email: PropTypes.string,
   password: PropTypes.string,
   passwordConfirmation: PropTypes.string,
+  t: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(RegisterContainer);
+export default compose(
+  connect(mapStateToProps),
+  translate('Registration'),
+)(RegisterContainer);

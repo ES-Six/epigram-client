@@ -3,6 +3,8 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import PropTypes from 'prop-types';
+import compose from 'recompose/compose';
+import { translate } from 'react-translate';
 import RegisterContainer from '../containers/RegisterContainer';
 
 const styles = theme => ({
@@ -33,6 +35,7 @@ const styles = theme => ({
 const Register = (props) => {
   const { classes } = props;
   const { history } = props;
+  const { t } = props;
 
   global.console.log('RENDER PARENT');
 
@@ -42,7 +45,7 @@ const Register = (props) => {
         <Grid className={classes.loginHorizontalCentering} item xs={12} sm={6} md={5}>
           <Paper className={classes.paper}>
             <Grid item xs={12}>
-              <h3>Login</h3>
+              <h3>{t('REGISTER')}</h3>
             </Grid>
             <RegisterContainer classes={classes} history={history} />
           </Paper>
@@ -55,6 +58,12 @@ const Register = (props) => {
 Register.propTypes = {
   classes: PropTypes.shape().isRequired,
   history: PropTypes.shape().isRequired,
+  t: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(Register);
+export default compose(
+  withStyles(styles, {
+    name: 'Register',
+  }),
+  translate('Registration'),
+)(Register);

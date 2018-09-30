@@ -92,8 +92,8 @@ class PhotoUpload extends Component {
 
     return (
       <div>
+        <MenuBar history={history} />
         <div className={classes.userContainer}>
-          <MenuBar history={history} />
           <h3>UploadPhoto</h3>
           <form
             id="upload-form"

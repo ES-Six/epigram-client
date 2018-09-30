@@ -37,4 +37,17 @@ export default {
     REGISTRATION_LINK: 'Vous n’avez pas de compte ? Creez-en un ici.',
     INVALID_CREDENTIALS: 'Identifiants invalides',
   },
+  Registration: {
+    REGISTER: 'Inscription',
+    REGISTER_BTN: 'Créer un compte',
+    PASSWORD_DONT_MATCH: 'Erreur : les mots de passes ne correspondent pas',
+    PASSWORD_TOO_SHORT: 'Erreur : le mot de passe fournis est trop court (min 6 caractères)',
+    EMAIL_ALREADY_USED: 'Erreur : L’adresse de courriel fournie est déjà utilisée par un autre compte',
+    LOGIN_LINK: 'Vous avez déjà un compte ? Cliquez ici pour vous connecter.',
+    EMAIL_PLACEHOLDER: 'votre@courriel.com',
+    USERNAME: 'Nom d’utilisateur',
+    EMAIL: 'Courriel',
+    PASSWORD: 'Mot de passe',
+    PASSWORD_CONFIRMATION: 'Confirmation du mot de passe',
+  },
 };

@@ -154,8 +154,8 @@ class AccountManagement extends Component {
 
     return (
       <div>
+        <MenuBar history={history} />
         <div className={classes.userContainer}>
-          <MenuBar history={history} />
           <h3>Account management</h3>
           <p>On this page, you can delete your account and manage your photos</p>
           {userInfos}
