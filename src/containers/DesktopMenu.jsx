@@ -11,6 +11,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Select from '@material-ui/core/Select';
+import compose from 'recompose/compose';
+import { translate } from 'react-translate';
 
 import {
   updateMobileMenuAnchor,
@@ -18,8 +20,7 @@ import {
   toggleDrawer,
   fetchLanguage,
 } from '../actions/MenuBar';
-import compose from "recompose/compose";
-import { translate } from "react-translate";
+
 
 const DesktopMenu = (props) => {
   const { classes } = props;

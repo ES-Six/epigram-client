@@ -5,6 +5,9 @@ import Drawer from '@material-ui/core/Drawer';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Link } from 'react-router-dom';
+import compose from 'recompose/compose';
+import { translate } from 'react-translate';
+
 import {
   toggleDrawer,
 } from '../actions/MenuBar';
@@ -14,6 +17,7 @@ const MenuDrawer = (props) => {
   const { openDrawer } = props;
   const { categories } = props;
   const { isFetching } = props;
+  const { t } = props;
 
   let sideList = null;
   if (isFetching) {
@@ -37,7 +41,7 @@ const MenuDrawer = (props) => {
       <div className={classes.list}>
         {categories.map(category => (
           <ListItem key={category.id} button component={Link} to={`/categories/${category.id}`}>
-            <ListItemText primary={category.name} />
+            <ListItemText primary={t(category.name)} />
           </ListItem>
         ))}
       </div>
@@ -68,6 +72,7 @@ const mapStateToProps = state => ({
   openDrawer: state.MenuBar.openDrawer,
   categories: state.MenuBar.categories,
   isFetching: state.MenuBar.isFetching,
+  translationsOverride: state.MenuBar.translationsOverride,
 });
 
 MenuDrawer.defaultProps = {
@@ -81,6 +86,10 @@ MenuDrawer.propTypes = {
   openDrawer: PropTypes.bool,
   categories: PropTypes.arrayOf(PropTypes.shape()),
   isFetching: PropTypes.bool.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(MenuDrawer);
+export default compose(
+  connect(mapStateToProps),
+  translate('MenuDrawer'),
+)(MenuDrawer);

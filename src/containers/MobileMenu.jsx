@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import MenuItem from '@material-ui/core/MenuItem/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Cookies from 'js-cookie';
+import compose from 'recompose/compose';
+import { translate } from 'react-translate';
 
 import {
   updateMobileMenuAnchor,
@@ -13,6 +15,7 @@ import {
 const MobileMenu = (props) => {
   const { history } = props;
   const { mobileMoreAnchorEl } = props;
+  const { t } = props;
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleMobileMenuClose = () => {
@@ -34,10 +37,10 @@ const MobileMenu = (props) => {
       onClose={handleMobileMenuClose}
     >
       <MenuItem component={Link} to="/account" onClick={handleMobileMenuClose}>
-        <p>Account managment</p>
+        <p>{t('ACCOUNT_MANAGEMENT')}</p>
       </MenuItem>
       <MenuItem onClick={() => { handleMobileMenuClose(); logout(); }}>
-        <p>Logout</p>
+        <p>{t('LOGOUT')}</p>
       </MenuItem>
     </Menu>
   );
@@ -45,6 +48,7 @@ const MobileMenu = (props) => {
 
 const mapStateToProps = state => ({
   mobileMoreAnchorEl: state.MenuBar.mobileMoreAnchorEl,
+  translationsOverride: state.MenuBar.translationsOverride,
 });
 
 MobileMenu.defaultProps = {
@@ -55,6 +59,10 @@ MobileMenu.propTypes = {
   history: PropTypes.shape().isRequired,
   mobileMoreAnchorEl: PropTypes.shape(),
   dispatch: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(MobileMenu);
+export default compose(
+  connect(mapStateToProps),
+  translate('ProfileMenu'),
+)(MobileMenu);
