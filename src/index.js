@@ -1,4 +1,5 @@
 /* eslint-env browser */
+
 import React from 'react';
 import { render } from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
@@ -8,7 +9,6 @@ import thunk from 'redux-thunk';
 import epigramApp from './reducers';
 import Root from './components/Root';
 import './css/index.css';
-import config from './config/config.json';
 
 const middleware = [thunk];
 const store = createStore(
@@ -20,7 +20,8 @@ const apiKey = Cookies.get('token');
 if (apiKey) {
   axios.defaults.headers.common['X-API-KEY'] = apiKey;
 }
-axios.defaults.baseURL = config.api_url;
+
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 render(
   <Root store={store} />, // eslint-disable-line react/jsx-filename-extension

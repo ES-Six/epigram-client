@@ -8,7 +8,6 @@ import axios from 'axios';
 import { translate } from 'react-translate';
 import PhotoComments from './PhotoComments';
 import PhotoOpinion from './PhotoOpinion';
-import config from '../config/config';
 
 import {
   fetchPhoto,
@@ -62,7 +61,7 @@ class PhotoInfo extends PureComponent {
     } else if (Object.keys(photo).length > 0) {
       photoInfos = (
         <div className={classes.photoContainer}>
-          <img src={`${config.api_url}${photo.url}`} alt={photo.title} className={classes.photo} />
+          <img src={`${process.env.REACT_APP_API_URL}${photo.url}`} alt={photo.title} className={classes.photo} />
           <PhotoOpinion history={history} classes={classes} match={match} />
           <p>
             {

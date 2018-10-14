@@ -9,7 +9,6 @@ import compose from 'recompose/compose';
 import openSocket from 'socket.io-client';
 import Cookies from 'js-cookie';
 import { translate } from 'react-translate';
-import config from '../config/config.json';
 
 import {
   addMessage,
@@ -24,7 +23,7 @@ class ChatContainer extends PureComponent {
     super(props);
     const { match, dispatch } = this.props;
 
-    socket = openSocket(config.api_websocket, {
+    socket = openSocket(process.env.REACT_APP_WS_URL, {
       path: '/socket.io',
       transports: ['websocket'],
       secure: true,

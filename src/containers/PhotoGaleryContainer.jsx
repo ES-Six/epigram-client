@@ -6,7 +6,6 @@ import Paper from '@material-ui/core/Paper';
 import { Link } from 'react-router-dom';
 import compose from 'recompose/compose';
 import { translate } from 'react-translate';
-import config from '../config/config';
 import { fetchPhotos } from '../actions/PhotoGalery';
 
 class PhotoGaleryContainer extends PureComponent {
@@ -77,7 +76,7 @@ class PhotoGaleryContainer extends PureComponent {
                 >
                   <div className={classes.photoContainer}>
                     <Link to={`/photo/${photo.id}`}>
-                      <img className={classes.photos} src={`${config.api_url}${photo.url}`} alt={photo.title} />
+                      <img className={classes.photos} src={`${process.env.REACT_APP_API_URL}${photo.url}`} alt={photo.title} />
                     </Link>
                   </div>
                   <h3 className={classes.photoTitle}>
