@@ -82,19 +82,17 @@ class PhotoUpload extends PureComponent {
         <h3>{t('UPLOAD_FORM_TITLE')}</h3>
         <form
           id="upload-form"
-          className={classes.container}
         >
           <Grid item xs={12}>
             <TextField
               id="filled-select-categories"
               select
               label={t('CATEGORY_SELECT')}
-              className={classes.textField}
               value={selectedCategory}
               onChange={handleChange(updateSelectedCategory)}
               SelectProps={{
                 MenuProps: {
-                  className: classes.menu,
+                  className: classes.menuProps,
                 },
               }}
               helperText={t('CATEGORY_SELECT_HELPER_TEXT')}
@@ -114,7 +112,6 @@ class PhotoUpload extends PureComponent {
               required
               label={t('TITLE')}
               type="text"
-              className={classes.textField}
               margin="normal"
               value={title}
               onChange={handleChange(updateTitle)}
@@ -126,7 +123,6 @@ class PhotoUpload extends PureComponent {
               required
               id="upload-form-description"
               label={t('DESCRIPTION')}
-              className={classes.textField}
               type="text"
               multiline
               rows="4"
@@ -148,7 +144,7 @@ class PhotoUpload extends PureComponent {
                 type="file"
                 onChange={handleFile}
               />
-              <Button variant="contained" color="primary" component="span" className={classes.button} disabled={isUploading}>
+              <Button variant="contained" color="primary" component="span" disabled={isUploading}>
                 {t('UPLOAD_BTN')}
               </Button>
             </label>
@@ -177,11 +173,18 @@ PhotoUpload.defaultProps = {
 };
 
 PhotoUpload.propTypes = {
-  classes: PropTypes.shape().isRequired,
+  classes: PropTypes.shape({
+    userContainer: PropTypes.string.isRequired,
+    menuProps: PropTypes.string.isRequired,
+    inputFile: PropTypes.string.isRequired,
+  }).isRequired,
   history: PropTypes.shape().isRequired,
   isUploading: PropTypes.bool,
   dispatch: PropTypes.func.isRequired,
-  categories: PropTypes.arrayOf(PropTypes.shape()),
+  categories: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+  })),
   title: PropTypes.string,
   description: PropTypes.string,
   selectedCategory: PropTypes.number,

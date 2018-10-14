@@ -38,8 +38,6 @@ const Login = (props) => {
   const { history } = props;
   const { t } = props;
 
-  global.console.log('RENDER PARENT');
-
   return (
     <div className={classes.root}>
       <Grid className={classes.loginVerticalCentering} container spacing={24}>

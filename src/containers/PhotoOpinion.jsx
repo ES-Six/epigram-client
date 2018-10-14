@@ -99,12 +99,22 @@ PhotoOpinion.defaultProps = {
 };
 
 PhotoOpinion.propTypes = {
-  classes: PropTypes.shape().isRequired,
+  classes: PropTypes.shape({
+    opinionButton: PropTypes.string.isRequired,
+    buttonGreen: PropTypes.string.isRequired,
+    buttonRed: PropTypes.string.isRequired,
+    opinionIcons: PropTypes.string.isRequired,
+  }).isRequired,
   match: PropTypes.shape().isRequired,
   userLike: PropTypes.bool,
   userDislike: PropTypes.bool,
   dispatch: PropTypes.func.isRequired,
-  photo: PropTypes.shape(),
+  photo: PropTypes.shape({
+    id: PropTypes.number,
+    url: PropTypes.string,
+    title: PropTypes.string,
+    description: PropTypes.string,
+  }),
 };
 
 export default compose(

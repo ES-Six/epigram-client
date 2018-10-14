@@ -51,7 +51,6 @@ const LoginContainer = (props) => {
     <div>
       {errorField}
       <form
-        className={classes.container}
         onSubmit={handleFormSubmit}
       >
         <Grid item xs={12}>
@@ -102,7 +101,10 @@ LoginContainer.defaultProps = {
 };
 
 LoginContainer.propTypes = {
-  classes: PropTypes.shape().isRequired,
+  classes: PropTypes.shape({
+    error: PropTypes.string.isRequired,
+    textField: PropTypes.string.isRequired,
+  }).isRequired,
   history: PropTypes.shape().isRequired,
   dispatch: PropTypes.func.isRequired,
   loginError: PropTypes.bool,

@@ -119,9 +119,21 @@ PhotoGaleryContainer.defaultProps = {
 };
 
 PhotoGaleryContainer.propTypes = {
-  classes: PropTypes.shape().isRequired,
+  classes: PropTypes.shape({
+    paper: PropTypes.string.isRequired,
+    photoContainer: PropTypes.string.isRequired,
+    photos: PropTypes.string.isRequired,
+    photoTitle: PropTypes.string.isRequired,
+    rmLinkStyle: PropTypes.string.isRequired,
+    photoDescription: PropTypes.string.isRequired,
+  }).isRequired,
   isFetching: PropTypes.bool,
-  photos: PropTypes.arrayOf(PropTypes.shape()),
+  photos: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    url: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+  })),
   t: PropTypes.func.isRequired,
   match: PropTypes.shape().isRequired,
   dispatch: PropTypes.func.isRequired,

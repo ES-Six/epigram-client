@@ -79,7 +79,6 @@ const RegisterContainer = (props) => {
     <div>
       {errorField}
       <form
-        className={classes.container}
         onSubmit={handleFormSubmit}
       >
         <Grid item xs={12}>
@@ -150,7 +149,6 @@ const mapStateToProps = state => ({
 });
 
 RegisterContainer.defaultProps = {
-  classes: {},
   history: {},
   passwordDoesntMatchError: false,
   passwordTooShortError: false,
@@ -162,7 +160,10 @@ RegisterContainer.defaultProps = {
 };
 
 RegisterContainer.propTypes = {
-  classes: PropTypes.shape(),
+  classes: PropTypes.shape({
+    error: PropTypes.string.isRequired,
+    textField: PropTypes.string.isRequired,
+  }).isRequired,
   history: PropTypes.shape(),
   dispatch: PropTypes.func.isRequired,
   passwordDoesntMatchError: PropTypes.bool,

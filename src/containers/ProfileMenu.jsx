@@ -13,7 +13,6 @@ import {
   updateDesktopMenuAnchor,
 } from '../actions/MenuBar';
 
-
 const ProfileMenu = (props) => {
   const { history } = props;
   const { anchorEl } = props;

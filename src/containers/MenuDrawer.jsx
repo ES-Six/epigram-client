@@ -103,7 +103,9 @@ MenuDrawer.defaultProps = {
 };
 
 MenuDrawer.propTypes = {
-  classes: PropTypes.shape().isRequired,
+  classes: PropTypes.shape({
+    list: PropTypes.string.isRequired,
+  }).isRequired,
   dispatch: PropTypes.func.isRequired,
   openDrawer: PropTypes.bool,
   categories: PropTypes.arrayOf(PropTypes.shape({

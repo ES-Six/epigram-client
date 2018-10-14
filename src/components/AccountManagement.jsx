@@ -95,10 +95,6 @@ const AccountManagement = (props) => {
 };
 
 const mapStateToProps = state => ({
-  isFetching: state.AccountManagement.isFetching,
-  isFetchingPhotos: state.UserGalery.isFetching,
-  user: state.AccountManagement.user,
-  photos: state.UserGalery.photos,
   translationsOverride: state.MenuBar.translationsOverride,
 });
 

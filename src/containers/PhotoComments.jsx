@@ -86,7 +86,6 @@ class PhotoComments extends PureComponent {
     return (
       <div>
         <form
-          className={classes.container}
           onSubmit={handlePostComment}
         >
           <Grid item xs={12}>
@@ -128,13 +127,26 @@ PhotoComments.defaultProps = {
 };
 
 PhotoComments.propTypes = {
-  classes: PropTypes.shape().isRequired,
+  classes: PropTypes.shape({
+    commentsContainer: PropTypes.string.isRequired,
+    textField: PropTypes.string.isRequired,
+  }).isRequired,
   match: PropTypes.shape().isRequired,
   isFetchingComments: PropTypes.bool,
   dispatch: PropTypes.func.isRequired,
-  photo: PropTypes.shape(),
+  photo: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    url: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+  }),
   comment: PropTypes.string,
-  comments: PropTypes.arrayOf(PropTypes.shape()),
+  comments: PropTypes.arrayOf(PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    user: PropTypes.shape({
+      username: PropTypes.string.isRequired,
+    }).isRequired,
+  })),
   t: PropTypes.func.isRequired,
 };
 

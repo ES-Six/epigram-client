@@ -113,12 +113,21 @@ PhotoInfo.defaultProps = {
 };
 
 PhotoInfo.propTypes = {
-  classes: PropTypes.shape().isRequired,
+  classes: PropTypes.shape({
+    photoContainer: PropTypes.string.isRequired,
+    paper: PropTypes.string.isRequired,
+    photo: PropTypes.string.isRequired,
+  }).isRequired,
   history: PropTypes.shape().isRequired,
   match: PropTypes.shape().isRequired,
   isFetching: PropTypes.bool,
   dispatch: PropTypes.func.isRequired,
-  photo: PropTypes.shape(),
+  photo: PropTypes.shape({
+    id: PropTypes.number,
+    url: PropTypes.string,
+    title: PropTypes.string,
+    description: PropTypes.string,
+  }),
   t: PropTypes.func.isRequired,
 };
 

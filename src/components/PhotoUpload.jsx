@@ -18,6 +18,9 @@ const styles = () => ({
   inputFile: {
     display: 'none',
   },
+  menuProps: {
+    display: 'block',
+  },
 });
 
 const PhotoUpload = (props) => {

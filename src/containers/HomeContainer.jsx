@@ -37,7 +37,11 @@ const mapStateToProps = state => ({
 });
 
 HomeContainer.propTypes = {
-  classes: PropTypes.shape().isRequired,
+  classes: PropTypes.shape({
+    loginHorizontalCentering: PropTypes.string.isRequired,
+    buttonCentered: PropTypes.string.isRequired,
+    largeButton: PropTypes.string.isRequired,
+  }).isRequired,
   dispatch: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 };
