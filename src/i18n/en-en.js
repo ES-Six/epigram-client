@@ -95,6 +95,6 @@ export default {
     MESSAGE_PLACEHOLDER: 'Type a message...',
     SEND_MESSAGE_BTN: 'Send',
     LOADING: 'Loading...',
-    NO_PHOTOS: 'This category has no photos yet...',
+    NO_PHOTO: 'This category has no photos yet...',
   },
 };
