@@ -122,7 +122,7 @@ class ChatContainer extends PureComponent {
     };
 
     return (
-      <Grid id="chat-container" className={classes.chatContainer} item xs={12}>
+      <Grid id="chat-container" item xs={12}>
         <Paper id="chat-paper" className={classes.chatPaper}>
           <Grid item xs={12}>
             <h3 className={classes.chatTitle}>{t('CHAT')}</h3>
@@ -179,11 +179,23 @@ ChatContainer.defaultProps = {
 };
 
 ChatContainer.propTypes = {
-  classes: PropTypes.shape().isRequired,
+  classes: PropTypes.shape({
+    chatPaper: PropTypes.string.isRequired,
+    chatTitle: PropTypes.string.isRequired,
+    chatMessagesContainer: PropTypes.string.isRequired,
+    chatMessageList: PropTypes.string.isRequired,
+    chatInputContainer: PropTypes.string.isRequired,
+    chatInput: PropTypes.string.isRequired,
+  }).isRequired,
   match: PropTypes.shape().isRequired,
   dispatch: PropTypes.func.isRequired,
   chatMessage: PropTypes.string,
-  messages: PropTypes.arrayOf(PropTypes.shape()),
+  messages: PropTypes.arrayOf(PropTypes.shape({
+    username: PropTypes.string.isRequired,
+    message: PropTypes.string.isRequired,
+    you: PropTypes.bool,
+    master: PropTypes.bool,
+  })),
   t: PropTypes.func.isRequired,
 };
 

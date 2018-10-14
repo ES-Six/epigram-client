@@ -98,7 +98,16 @@ DesktopMenu.defaultProps = {
 };
 
 DesktopMenu.propTypes = {
-  classes: PropTypes.shape().isRequired,
+  classes: PropTypes.shape({
+    menuButton: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    typography: PropTypes.string.isRequired,
+    search: PropTypes.string.isRequired,
+    languageSelector: PropTypes.string.isRequired,
+    grow: PropTypes.string.isRequired,
+    sectionDesktop: PropTypes.string.isRequired,
+    sectionMobile: PropTypes.string.isRequired,
+  }).isRequired,
   anchorEl: PropTypes.shape(),
   dispatch: PropTypes.func.isRequired,
   locale: PropTypes.string,

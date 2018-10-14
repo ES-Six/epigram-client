@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { fade } from '@material-ui/core/styles/colorManipulator';
@@ -8,10 +8,6 @@ import DesktopMenu from '../containers/DesktopMenu';
 import MobileMenu from '../containers/MobileMenu';
 import ProfileMenu from '../containers/ProfileMenu';
 import MenuDrawer from '../containers/MenuDrawer';
-import {
-  fetchCategories,
-  updateCategories,
-} from '../actions/MenuBar';
 
 const styles = theme => ({
   root: {
@@ -92,44 +88,26 @@ const styles = theme => ({
     'text-decoration': 'none',
   },
   languageSelector: {
-    width: '200px',
+    width: '100%',
+    'min-width': '200px',
+    'text-align': 'center',
     color: 'white',
-    'padding-left': '15px',
   },
 });
 
-class MenuBar extends PureComponent {
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(fetchCategories());
-  }
+const MenuBar = (props) => {
+  const { classes } = props;
+  const { history } = props;
 
-  componentWillReceiveProps(nextProps) {
-    const { dispatch } = this.props;
-    const { categories } = this.props;
-
-    if (categories.length < nextProps.categories.length) {
-      dispatch(updateCategories(nextProps.categories));
-    } else {
-      dispatch(updateCategories(nextProps.categories));
-    }
-  }
-
-  render() {
-    const { classes } = this.props;
-    const { history } = this.props;
-    const { isFetching } = this.props;
-
-    return (
-      <div className={classes.root}>
-        <DesktopMenu classes={classes} history={history} />
-        <ProfileMenu history={history} />
-        <MobileMenu classes={classes} history={history} />
-        <MenuDrawer classes={classes} isFetching={isFetching} />
-      </div>
-    );
-  }
-}
+  return (
+    <div className={classes.root}>
+      <DesktopMenu classes={classes} history={history} />
+      <ProfileMenu history={history} />
+      <MobileMenu classes={classes} history={history} />
+      <MenuDrawer classes={classes} />
+    </div>
+  );
+};
 
 const mapStateToProps = state => ({
   isFetching: state.MenuBar.isFetching,
@@ -137,17 +115,9 @@ const mapStateToProps = state => ({
   translationsOverride: state.MenuBar.translationsOverride,
 });
 
-MenuBar.defaultProps = {
-  isFetching: false,
-  categories: [],
-};
-
 MenuBar.propTypes = {
   classes: PropTypes.shape().isRequired,
   history: PropTypes.shape().isRequired,
-  isFetching: PropTypes.bool,
-  dispatch: PropTypes.func.isRequired,
-  categories: PropTypes.arrayOf(PropTypes.shape()),
 };
 
 export default compose(

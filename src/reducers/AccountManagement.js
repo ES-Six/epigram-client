@@ -1,5 +1,7 @@
 const PhotoGalery = (state = {
-  user: {},
+  user: {
+    email: 'default@email.net',
+  },
   isFetching: false,
 }, action) => {
   switch (action.type) {

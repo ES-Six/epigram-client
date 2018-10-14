@@ -25,7 +25,7 @@ class AccountContainer extends PureComponent {
     const { dispatch } = this.props;
     const { user } = this.props;
 
-    if (user.length !== nextProps.user.length) {
+    if (Object.keys(user).length !== Object.keys(nextProps.user).length) {
       dispatch(updateUser(nextProps.user));
     } else {
       dispatch(updateUser(nextProps.user));
@@ -111,18 +111,33 @@ const mapStateToProps = state => ({
 AccountContainer.defaultProps = {
   isFetching: false,
   isFetchingPhotos: false,
-  user: {},
+  user: {
+    email: 'default@email.net',
+  },
   photos: [],
 };
 
 AccountContainer.propTypes = {
-  classes: PropTypes.shape().isRequired,
+  classes: PropTypes.shape({
+    userContainer: PropTypes.string.isRequired,
+    loginHorizontalCentering: PropTypes.string.isRequired,
+    leftButton: PropTypes.string.isRequired,
+    accountButton: PropTypes.string.isRequired,
+    rightButton: PropTypes.string.isRequired,
+  }).isRequired,
   history: PropTypes.shape().isRequired,
   isFetching: PropTypes.bool,
   isFetchingPhotos: PropTypes.bool,
   dispatch: PropTypes.func.isRequired,
-  user: PropTypes.shape(),
-  photos: PropTypes.arrayOf(PropTypes.shape()),
+  user: PropTypes.shape({
+    email: PropTypes.string.isRequired,
+  }),
+  photos: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    url: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+  })),
   t: PropTypes.func.isRequired,
 };
 
