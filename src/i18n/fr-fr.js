@@ -91,6 +91,8 @@ export default {
   PhotoGalery: {
     CHAT: 'Chat',
     YOU: 'Vous',
+    SYSTEM_USER: 'Système',
+    SYSTEM_USER_WELCOME: 'Vous êtes connectés au chat, entrez un message pour débuter la conversation :)',
     MESSAGE: 'Message',
     MESSAGE_PLACEHOLDER: 'Saisissez un message...',
     SEND_MESSAGE_BTN: 'Envoyer',

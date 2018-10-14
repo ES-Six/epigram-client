@@ -58,16 +58,33 @@ class ChatContainer extends PureComponent {
     global.console.log('WEBSOCKET INIT OK');
   }
 
+  componentDidMount() {
+    const { dispatch, t } = this.props;
+
+    dispatch(clearChatMessage());
+    dispatch(addMessage({
+      message: t('SYSTEM_USER_WELCOME'),
+      username: t('SYSTEM_USER'),
+      master: true,
+    }));
+  }
+
   componentWillReceiveProps(nextProps) {
     const {
       dispatch,
       match,
+      t,
     } = this.props;
 
     if (nextProps.match.params.id !== match.params.id) {
       if (socket) {
         dispatch(updateChatMessage(''));
         dispatch(clearChatMessage());
+        dispatch(addMessage({
+          message: t('SYSTEM_USER_WELCOME'),
+          username: t('SYSTEM_USER'),
+          master: true,
+        }));
         socket.emit('chanelSubscribe', {
           chanelId: nextProps.match.params.id,
           token: Cookies.get('token'),
@@ -95,6 +112,7 @@ class ChatContainer extends PureComponent {
       dispatch(addMessage({
         message: chatMessage,
         username: t('YOU'),
+        you: true,
       }));
       dispatch(updateChatMessage(''));
     };
@@ -120,9 +138,9 @@ class ChatContainer extends PureComponent {
                     messages.map((message, index) => (
                       <div key={index /* eslint-disable-line react/no-array-index-key */}>
                         <li>
-                          { message.username }
+                          { message.you ? t('YOU') : message.username }
                           :
-                          { message.message }
+                          { message.master ? t('SYSTEM_USER_WELCOME') : message.message }
                         </li>
                         {messages.length > index + 1 ? <hr /> : null}
                       </div>
