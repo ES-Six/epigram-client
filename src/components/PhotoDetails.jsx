@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
@@ -66,7 +66,7 @@ const styles = theme => ({
   },
 });
 
-class PhotoDetails extends Component {
+class PhotoDetails extends PureComponent {
   componentDidMount() {
     const { dispatch, match } = this.props;
     dispatch(fetchPhoto(match.params.id));

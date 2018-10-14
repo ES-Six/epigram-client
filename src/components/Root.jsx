@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { TranslatorProvider } from 'react-translate';
 import connect from 'react-redux/es/connect/connect';
@@ -18,7 +18,7 @@ import {
   fetchLanguage,
 } from '../actions/MenuBar';
 
-class Root extends Component {
+class Root extends PureComponent {
   componentDidMount() {
     const { store } = this.props;
     const { dispatch } = store;

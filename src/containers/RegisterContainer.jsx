@@ -6,6 +6,8 @@ import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import compose from 'recompose/compose';
+import { translate } from 'react-translate';
 import {
   setPasswordDoesntMatchErorr,
   updateEmail,
@@ -15,8 +17,6 @@ import {
   setPasswordTooShortErorr,
   updateUsername,
 } from '../actions/Register';
-import compose from "recompose/compose";
-import { translate } from "react-translate";
 
 const RegisterContainer = (props) => {
   const { classes } = props;

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
@@ -91,7 +91,7 @@ const styles = theme => ({
   },
 });
 
-class AccountManagement extends Component {
+class AccountManagement extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchUser());

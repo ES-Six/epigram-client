@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import compose from 'recompose/compose';
@@ -30,7 +30,7 @@ const styles = () => ({
   },
 });
 
-class PhotoUpload extends Component {
+class PhotoUpload extends PureComponent {
   componentDidMount() {
     const { categories } = this.props;
     const { dispatch } = this.props;

@@ -99,6 +99,7 @@ UserGaleryContainer.propTypes = {
   classes: PropTypes.shape().isRequired,
   isFetching: PropTypes.bool.isRequired,
   photos: PropTypes.arrayOf(PropTypes.shape()),
+  t: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({

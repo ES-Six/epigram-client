@@ -11,10 +11,10 @@
     npm run lint
     
     
-### Descritpion du projet:
+### Project description
 
-epigram est un projet simple qui consiste à fusionner un instagram-like avec un système de chat, permettant aux utilisateurs de discuter en direct de leurs derniers posts et ainsi de créer une salle de chat lié à une catégorie.
+Epigram is a simple project that consists of merging an instagram-like with a chat system, allowing users to chat live about their latest posts and thus create a chat room linked to a category.
 
-### Lien vers la prod:
+### Link to EPIGRAM production website
 
 http://www.epigram.tk.s3-website.eu-west-3.amazonaws.com

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { fade } from '@material-ui/core/styles/colorManipulator';
@@ -98,7 +98,7 @@ const styles = theme => ({
   },
 });
 
-class MenuBar extends Component {
+class MenuBar extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchCategories());
