@@ -7,6 +7,7 @@ import AccountManagement from './AccountManagement';
 import UserGalery from './UserGalery';
 import PhotoUpload from './PhotoUpload';
 import PhotoDetails from './PhotoDetails';
+import UserProfileForm from './UserProfileForm';
 
 export default combineReducers({
   Login,
@@ -17,4 +18,5 @@ export default combineReducers({
   UserGalery,
   PhotoUpload,
   PhotoDetails,
+  UserProfileForm,
 });

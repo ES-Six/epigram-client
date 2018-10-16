@@ -11,6 +11,7 @@ import PhotoGalery from './PhotoGalery';
 import AccountManagement from './AccountManagement';
 import PhotoUpload from './PhotoUpload';
 import PhotoDetails from './PhotoDetails';
+import UserProfileForm from './UserProfileForm';
 import available from '../i18n/available';
 import defaultLocale from '../i18n/en-en';
 
@@ -46,6 +47,7 @@ class Root extends PureComponent {
               <Route path="/account" exact component={AccountManagement} />
               <Route path="/upload" exact component={PhotoUpload} />
               <Route path="/photo/:id" exact component={PhotoDetails} />
+              <Route path="/update_profile" exact component={UserProfileForm} />
             </div>
           </Router>
         </Provider>

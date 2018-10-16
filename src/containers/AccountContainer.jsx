@@ -69,6 +69,37 @@ class AccountContainer extends PureComponent {
             {t('EMAIl')}
             {user.email}
           </p>
+
+          {user.name ? (
+            <p>
+              {t('NAME')}
+              {user.name}
+            </p>
+          ) : null}
+
+          {user.first_name ? (
+            <p>
+              {t('FIRST_NAME')}
+              {user.first_name}
+            </p>
+          ) : null}
+
+          {user.country ? (
+            <p>
+              {t('COUNTRY')}
+              {user.country}
+            </p>
+          ) : null}
+
+          {user.adress ? (
+            <p>
+              {t('ADRESS')}
+              {user.adress && user.adress.length > 0 ? `${user.adress}, ` : user.adress}
+              {user.zip && user.zip.length > 0 ? `${user.zip}, ` : user.zip}
+              {user.city && user.city.length > 0 ? `${user.city}, ` : user.city}
+              {user.country && user.country.length > 0 ? user.country : user.country}
+            </p>
+          ) : null}
         </div>
       );
     } else {
@@ -92,7 +123,7 @@ class AccountContainer extends PureComponent {
                 <Button className={classes.accountButton} component={Link} to="/upload" variant="contained" color="primary">{t('UPLOAD_PHOTO_BTN')}</Button>
               </Grid>
               <Grid className={classes.rightButton} item md={4} sm={4} xs={12}>
-                <Button className={classes.accountButton} component={Link} to="/update_profile" variant="contained" color="primary">Mettre à jour votre profil</Button>
+                <Button className={classes.accountButton} component={Link} to="/update_profile" variant="contained" color="primary">{t('PROFILE_UPDATE')}</Button>
               </Grid>
             </Grid>
           </Grid>
