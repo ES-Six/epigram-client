@@ -64,6 +64,17 @@ class PhotoInfo extends PureComponent {
           <img src={`${process.env.REACT_APP_API_URL}${photo.url}`} alt={photo.title} className={classes.photo} />
           <PhotoOpinion history={history} classes={classes} match={match} />
           <p>
+            <span className={classes.likesLabel}>
+              Total likes :
+              {photo.total_likes}
+            </span>
+            <br />
+            <span className={classes.dislikesLabel}>
+              Total dislikes :
+              {photo.total_dislikes}
+            </span>
+          </p>
+          <p>
             {
               /*
                * ESLint rule disabled for this line because
@@ -117,6 +128,8 @@ PhotoInfo.propTypes = {
     photoContainer: PropTypes.string.isRequired,
     paper: PropTypes.string.isRequired,
     photo: PropTypes.string.isRequired,
+    likesLabel: PropTypes.string.isRequired,
+    dislikesLabel: PropTypes.string.isRequired,
   }).isRequired,
   history: PropTypes.shape().isRequired,
   match: PropTypes.shape().isRequired,

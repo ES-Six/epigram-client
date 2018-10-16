@@ -50,6 +50,12 @@ const styles = theme => ({
     'text-align': 'start',
     'margin-top': '20px',
   },
+  dislikesLabel: {
+    color: 'red',
+  },
+  likesLabel: {
+    color: 'green',
+  },
 });
 
 const PhotoDetails = (props) => {

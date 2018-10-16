@@ -35,6 +35,12 @@ export const updateUserDislike = flag => ({
   flag,
 });
 
+export const updateOpinionCounters = (opinion, value) => ({
+  type: 'UPDATE_OPINION_COUNTERS',
+  opinion,
+  value,
+});
+
 export const fetchPhoto = photoId => (dispatch) => {
   dispatch(isFetching(true));
   const request = axios.get(`/photo/${photoId}/info`);

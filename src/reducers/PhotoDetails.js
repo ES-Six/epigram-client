@@ -46,6 +46,18 @@ const PhotoDetails = (state = {
         userDislike: action.flag,
       };
     }
+    case 'UPDATE_OPINION_COUNTERS': {
+      const { photo } = state;
+      if (action.opinion === 'LIKE') {
+        photo.total_likes += action.value;
+      } else {
+        photo.total_dislikes += action.value;
+      }
+      return {
+        ...state,
+        photo,
+      };
+    }
     case 'UPDATE_COMMENT': {
       return {
         ...state,

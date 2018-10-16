@@ -91,6 +91,9 @@ class AccountContainer extends PureComponent {
               <Grid className={classes.rightButton} item md={4} sm={4} xs={12}>
                 <Button className={classes.accountButton} component={Link} to="/upload" variant="contained" color="primary">{t('UPLOAD_PHOTO_BTN')}</Button>
               </Grid>
+              <Grid className={classes.rightButton} item md={4} sm={4} xs={12}>
+                <Button className={classes.accountButton} component={Link} to="/update_profile" variant="contained" color="primary">Mettre à jour votre profil</Button>
+              </Grid>
             </Grid>
           </Grid>
         </div>

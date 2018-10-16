@@ -10,6 +10,7 @@ import {
   updateUserLike,
   updateUserDislike,
   fetchUserOpinion,
+  updateOpinionCounters,
 } from '../actions/PhotoDetails';
 
 class PhotoOpinion extends PureComponent {
@@ -50,9 +51,17 @@ class PhotoOpinion extends PureComponent {
           opinion,
         }).then(() => {
           if (opinion === 'LIKE') {
+            dispatch(updateOpinionCounters('LIKE', 1));
+            if (userDislike === true) {
+              dispatch(updateOpinionCounters('DISLIKE', -1));
+            }
             dispatch(updateUserLike(true));
             dispatch(updateUserDislike(false));
           } else {
+            dispatch(updateOpinionCounters('DISLIKE', 1));
+            if (userLike === true) {
+              dispatch(updateOpinionCounters('LIKE', -1));
+            }
             dispatch(updateUserLike(false));
             dispatch(updateUserDislike(true));
           }
@@ -61,6 +70,11 @@ class PhotoOpinion extends PureComponent {
         });
       } else {
         axios.delete(`/photo/${photo.id}/opinion`).then(() => {
+          if (userLike === true) {
+            dispatch(updateOpinionCounters('LIKE', -1));
+          } else if (userDislike === true) {
+            dispatch(updateOpinionCounters('DISLIKE', -1));
+          }
           dispatch(updateUserLike(false));
           dispatch(updateUserDislike(false));
         }).catch((error) => {
