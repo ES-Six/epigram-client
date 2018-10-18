@@ -16,7 +16,7 @@ const HomeContainer = (props) => {
   };
 
   return (
-    <Grid className={classes.loginHorizontalCentering} item xs={12} sm={6} md={6}>
+    <Grid className={classes.buttonsHorizontalCentering} item xs={12} sm={6} md={6}>
       <Grid container spacing={24}>
         <Grid className={classes.buttonCentered} item md={4} sm={4} xs={12}>
           <Button onClick={setDrawerOpened(true)} className={classes.largeButton} type="submit" variant="contained" color="primary">{t('BROWSE_PHOTOS')}</Button>
@@ -38,7 +38,7 @@ const mapStateToProps = state => ({
 
 HomeContainer.propTypes = {
   classes: PropTypes.shape({
-    loginHorizontalCentering: PropTypes.string.isRequired,
+    buttonsHorizontalCentering: PropTypes.string.isRequired,
     buttonCentered: PropTypes.string.isRequired,
     largeButton: PropTypes.string.isRequired,
   }).isRequired,

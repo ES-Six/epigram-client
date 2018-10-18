@@ -8,6 +8,7 @@ import UserGalery from './UserGalery';
 import PhotoUpload from './PhotoUpload';
 import PhotoDetails from './PhotoDetails';
 import UserProfileForm from './UserProfileForm';
+import PlatformStatistics from './PlatformStatistics';
 
 export default combineReducers({
   Login,
@@ -19,4 +20,5 @@ export default combineReducers({
   PhotoUpload,
   PhotoDetails,
   UserProfileForm,
+  PlatformStatistics,
 });
