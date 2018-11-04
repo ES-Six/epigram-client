@@ -1,7 +1,7 @@
 export default {
   locale: 'fr-fr',
   Home: {
-    WELCOME_TO_EPIGRAM: 'Bienvenu sur EPIGram',
+    WELCOME_TO_EPIGRAM: 'Bienvenue sur EPIGram',
     EPIGRAM_DESCRIPTION: 'EPIGram est une nouvelle plateforme qui fonctionne avec ReactJS et qui vous permet de partager n’importe quels photos regroupés dans vos catégories préférés.',
     WHAT_YOU_CAN_DO: 'Voici quelques choses que vous pouvez faire pour commencer',
     PLATFORM_STATISTICS: 'Statistiques de la plateforme',
@@ -107,7 +107,7 @@ export default {
     CHAT: 'Chat',
     YOU: 'Vous',
     SYSTEM_USER: 'Système',
-    SYSTEM_USER_WELCOME: 'Vous êtes connectés au chat, entrez un message pour débuter la conversation :)',
+    SYSTEM_USER_WELCOME: ' Vous êtes connectés au chat, entrez un message pour débuter la conversation :)',
     MESSAGE: 'Message',
     MESSAGE_PLACEHOLDER: 'Saisissez un message...',
     SEND_MESSAGE_BTN: 'Envoyer',

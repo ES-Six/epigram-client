@@ -90,6 +90,9 @@ const styles = theme => ({
     'text-decoration': 'none',
     color: 'black',
   },
+  Nophoto: {
+    paddingTop: '60px',
+  },
 });
 
 const PhotoGalery = (props) => {

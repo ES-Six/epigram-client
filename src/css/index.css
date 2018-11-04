@@ -7,7 +7,24 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background: url(../assets/background.jpg);
+    background-image: url("../assets/photoLab.png");
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: auto;
+}
+
+h2{
+  font-family: Coda;
+}
+
+h3 {
+    font-family: Coda;
+    color: azure;
+}
+
+
+p, li, a {
+    font-family: Calibri;
 }
 
 @media (max-width: 580px) {

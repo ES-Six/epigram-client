@@ -57,7 +57,7 @@ class PhotoGaleryContainer extends PureComponent {
             justify="center"
             alignItems="center"
           >
-            <h3>{t('NO_PHOTO')}</h3>
+            <h3 className={classes.Nophoto}>{t('NO_PHOTO')}</h3>
           </Grid>
         </Grid>);
     } else {
@@ -122,6 +122,7 @@ PhotoGaleryContainer.propTypes = {
   classes: PropTypes.shape({
     paper: PropTypes.string.isRequired,
     photoContainer: PropTypes.string.isRequired,
+    Nophoto: PropTypes.string.isRequired,
     photos: PropTypes.string.isRequired,
     photoTitle: PropTypes.string.isRequired,
     rmLinkStyle: PropTypes.string.isRequired,

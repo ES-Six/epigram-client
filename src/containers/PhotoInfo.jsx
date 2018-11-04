@@ -74,20 +74,6 @@ class PhotoInfo extends PureComponent {
               {photo.total_dislikes}
             </span>
           </p>
-          <p>
-            {
-              /*
-               * ESLint rule disabled for this line because
-               * it's explicitely indicated here by the author of the rule
-               * https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-array-index-key.md
-               */
-              photo.description.split('\n').map((line, key) => (
-                <span key={key /* eslint-disable-line react/no-array-index-key */}>
-                  {line}
-                  <br />
-                </span>
-              ))}
-          </p>
           {commands}
           <Paper className={classes.paper}>
             <PhotoComments history={history} classes={classes} match={match} />
@@ -126,6 +112,7 @@ PhotoInfo.defaultProps = {
 PhotoInfo.propTypes = {
   classes: PropTypes.shape({
     photoContainer: PropTypes.string.isRequired,
+    defCate: PropTypes.string.isRequired,
     paper: PropTypes.string.isRequired,
     photo: PropTypes.string.isRequired,
     likesLabel: PropTypes.string.isRequired,

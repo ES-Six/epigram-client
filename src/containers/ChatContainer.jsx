@@ -114,7 +114,7 @@ class ChatContainer extends PureComponent {
         username: t('YOU'),
         you: true,
       }));
-      dispatch(updateChatMessage(''));
+      dispatch(updateChatMessage(' '));
     };
 
     const handleChange = action => (event) => {
