@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 import compose from 'recompose/compose';
 import connect from 'react-redux/es/connect/connect';
 import { translate } from 'react-translate';
@@ -11,6 +12,16 @@ const styles = () => ({
   loginHorizontalCentering: {
     margin: 'auto',
     'max-width': '500px',
+  },
+  paper: {
+    marginTop: '100px',
+    padding: '10px',
+    margin: '15px',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    width: '40%',
+    textAlign: 'center',
+    height: '500px',
   },
   userContainer: {
     'text-align': 'center',
@@ -30,7 +41,9 @@ const PhotoUpload = (props) => {
   return (
     <div>
       <MenuBar history={history} />
-      <PhotoUploadFormContainer classes={classes} history={history} />
+      <Paper className={classes.paper}>
+        <PhotoUploadFormContainer classes={classes} history={history} />
+      </Paper>
     </div>
   );
 };
