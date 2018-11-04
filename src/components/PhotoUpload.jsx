@@ -13,7 +13,7 @@ const styles = () => ({
     margin: 'auto',
     'max-width': '500px',
   },
-  paper: {
+  paperUpload: {
     marginTop: '100px',
     padding: '10px',
     margin: '15px',
@@ -41,7 +41,7 @@ const PhotoUpload = (props) => {
   return (
     <div>
       <MenuBar history={history} />
-      <Paper className={classes.paper}>
+      <Paper className={classes.paperUpload}>
         <PhotoUploadFormContainer classes={classes} history={history} />
       </Paper>
     </div>

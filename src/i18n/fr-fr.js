@@ -84,7 +84,7 @@ export default {
     EMAIl: 'Couriel : ',
     AVATAR_ALT: 'Gravatar utilisateur',
     TITLE: 'Gestion du compte',
-    DESCRIPTION: 'Sur cette page, vous pouvez effacer votre compte, gérer vos photos et mettre à jour les informations de votre profil, n’hésitez pas à compléter votre porfil.',
+    DESCRIPTION: 'Sur cette page, vous pouvez effacer votre compte, gérer vos photos et mettre à jour les informations de votre profil, n’hésitez pas à compléter votre profil.',
     DELETE_ACCOUNT_BTN: 'Supprimer le compte',
     UPLOAD_PHOTO_BTN: 'Téléverser une photo',
     NO_PHOTO_FOUND: 'Vous n’avez téléverser aucune photo pour le moment...',

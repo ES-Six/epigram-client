@@ -1,6 +1,5 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import connect from 'react-redux/es/connect/connect';
@@ -17,13 +16,9 @@ const styles = theme => ({
     flexGrow: 1,
   },
   paper: {
-    marginTop: '100px',
     padding: theme.spacing.unit * 2,
     color: theme.palette.text.secondary,
     margin: '15px',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    width: '40%',
     textAlign: 'center',
     height: '500px',
   },
@@ -94,9 +89,7 @@ const AccountManagement = (props) => {
   return (
     <div>
       <MenuBar history={history} />
-      <Paper className={classes.paper}>
-        <AccountContainer classes={classes} history={history} />
-      </Paper>
+      <AccountContainer classes={classes} history={history} />
     </div>
   );
 };

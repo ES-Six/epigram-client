@@ -51,11 +51,11 @@ const styles = theme => ({
     'margin-top': '20px',
   },
   dislikesLabel: {
-    color: 'white',
+    color: '#f50057',
     fontFamily: 'Coda',
   },
   likesLabel: {
-    color: 'white',
+    color: '#19611d',
     fontFamily: 'Coda',
   },
 });
